@@ -66,18 +66,35 @@ var auth = {
   },
 
   logout: function (req, res) {
-   cookie = req.cookies;
+    cookie = req.cookies;
     //cookie = req.cookies['token']
     for (var prop in cookie) {
-        if (!cookie.hasOwnProperty(prop)) {
-            continue;
-        }    
-        res.cookie(prop, '', {expires: new Date(0)});
+      if (!cookie.hasOwnProperty(prop)) {
+        continue;
+      }
+      res.cookie(prop, '', { expires: new Date(0) });
     }
     res.status(200).json({
-      message:"logout successfully!!!!",
-      status:200
+      message: "logout successfully!!!!",
+      status: 200
     })
+  },
+
+  doLogout: function (req, res) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function (err) {
+        if (err) {
+          return next(err);
+        } else {
+          res.status(200).json({
+            message: "logout successfully!!!!",
+            status: 200
+          })
+        }
+      });
+    }
+
   }
 
 }
