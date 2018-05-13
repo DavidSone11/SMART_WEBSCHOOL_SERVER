@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var UserModel = require("../models/user")
+var UserModel = require("../models/user.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
 var fs = require('fs');
