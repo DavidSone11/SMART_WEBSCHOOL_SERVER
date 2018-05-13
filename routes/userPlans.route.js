@@ -13,11 +13,11 @@ var userPlanOBJ = {
         var options = {
             perPage: parseInt(req.query.limit) || 10,
             page: parseInt(req.query.page) || 1,
-            order: req.query.order || 'userName'
+            order: req.query.order || 'planName'
         };
-        var query = userPlanModel.find({ "markDelete": false }).sort('userName');
+        var query = userPlanModel.find({ "markDelete": false }).sort('planName');
         query.paginate(options, function (err, results) {
-            if (err) throw new Error("Error in User");
+            if (err) throw new Error("Error in UserPlan");
             else {
                 return res.json(results);
             }
@@ -30,7 +30,8 @@ var userPlanOBJ = {
         var userplanOBJ = {
             planName: "planName002",
             reviewer: "admin",
-            owner: "san"
+            owner: "san",
+            coPlanners:['plan001','plan002','plan003','plan004','plan005']
 
         }
         userPlanModel.create(userplanOBJ, function (err, results) {
