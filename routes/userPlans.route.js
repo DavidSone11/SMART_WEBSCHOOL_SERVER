@@ -8,7 +8,7 @@ var fs = require('fs');
 
 
 
-var users = {
+var userPlanOBJ = {
     getPlanAllPlans: function (req, res) {
         var options = {
             perPage: parseInt(req.query.limit) || 10,
@@ -27,19 +27,17 @@ var users = {
 
     savePlan: function (req, res) {
 
-        var userOBJ = {
-            userName: "admin",
-            firstName: "adminR",
-            lastName: "adminR",
-            password: "admin123456",
-            email: "admin@abc.com",
-            email: "admin",
+        var userplanOBJ = {
+            planName: "planName002",
+            reviewer: "admin",
+            owner: "san"
+
         }
-        userPlanModel.create(userOBJ, function (err, results) {
+        userPlanModel.create(userplanOBJ, function (err, results) {
             if (err) throw new Error("Error in Saving ");
             else {
                 return res.json({
-                    "message": "User has been saved !!!!",
+                    "message": "UserPlan has been saved !!!!",
 
                 })
             }
@@ -47,31 +45,31 @@ var users = {
         });
     },
 
-    updateUser: function (req, res) {
-        return new Promise(function (resolve, reject) {
-            userPlanModel.findOneAndUpdate({ email: req.query.email }, { $set: { email: "santosh.citech@gmail.com" } }, { new: true }, function (err, doc) {
-                if (err) {
-                    reject("Something wrong when updating data!");
-                }
-                resolve(res.json({
-                    message: "Update successfully !!!!"
-                }))
-            });
-        });
-    },
+    // updateUser: function (req, res) {
+    //     return new Promise(function (resolve, reject) {
+    //         userPlanModel.findOneAndUpdate({ email: req.query.email }, { $set: { email: "santosh.citech@gmail.com" } }, { new: true }, function (err, doc) {
+    //             if (err) {
+    //                 reject("Something wrong when updating data!");
+    //             }
+    //             resolve(res.json({
+    //                 message: "Update successfully !!!!"
+    //             }))
+    //         });
+    //     });
+    // },
 
-    deleteUser: function (req, res) {
-        return new Promise(function (resolve, reject) {
-            userPlanModel.remove({ email: "admin" }, function (err, doc) {
-                if (err) {
-                    reject("Something wrong when updating data!");
-                }
-                resolve(res.json({
-                    message: "delete User successfully !!!!"
-                }))
-            });
-        });
-    },
+    // deleteUser: function (req, res) {
+    //     return new Promise(function (resolve, reject) {
+    //         userPlanModel.remove({ email: "admin" }, function (err, doc) {
+    //             if (err) {
+    //                 reject("Something wrong when updating data!");
+    //             }
+    //             resolve(res.json({
+    //                 message: "delete User successfully !!!!"
+    //             }))
+    //         });
+    //     });
+    // },
 
 
 
@@ -82,4 +80,4 @@ var users = {
 }
 
 
-module.exports = users;
+module.exports = userPlanOBJ;
