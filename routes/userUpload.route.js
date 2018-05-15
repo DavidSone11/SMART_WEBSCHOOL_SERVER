@@ -36,9 +36,7 @@ var userUploadOBJ = {
 
     saveUpload: function (req, res) {
         fileName = req.file.originalname;
-        console.log(fileName);
         var file = __dirname + "/" + req.file.name;
-        console.log("File Path : " + req.file.path);
         var filePath = req.file.path;
 
         var userUploadModelOBJ = new userUploadModel();
@@ -47,8 +45,8 @@ var userUploadOBJ = {
 
 
             userUploadModelOBJ.img.data = data;
-            userUploadModelOBJ.img.contentType = 'image/png';
-            userUploadModelOBJ.fileType = 'image/png',
+            userUploadModelOBJ.img.contentType = req.file.mimetype;
+            userUploadModelOBJ.fileType = req.file.mimetype,
                 userUploadModelOBJ.originalFileName = fileName,
                 userUploadModelOBJ.filename = removeExtension(fileName),
                 userUploadModelOBJ.uploadedBy = "SANTOSH",
