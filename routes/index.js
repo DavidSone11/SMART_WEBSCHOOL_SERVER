@@ -31,4 +31,16 @@ router.post('/api/v1/userPlan/createUserPlan', userPlan.savePlan);
 // router.delete('/api/v1/userPlan/deleteUser', user.deleteUser);
 // router.post('/api/v1/userPlan/bulkCreate', user.createBulkUser);
 
+
+
+
+// Route for UserPlan
+router.get('/api/v1/userUpload/getAllUserUpload', require("./userUpload.route").getllUpload);
+router.post('/api/v1/userUpload/createUserUpload', require("./userUpload.route").saveUpload);
+// router.get('/api/v1/userPlan/findByUsername', user.findByUserName);
+// router.put('/api/v1/userPlan/updateUser', user.updateUser);
+// router.delete('/api/v1/userPlan/deleteUser', user.deleteUser);
+// router.post('/api/v1/userPlan/bulkCreate', user.createBulkUser);
+
+
 module.exports = router;
