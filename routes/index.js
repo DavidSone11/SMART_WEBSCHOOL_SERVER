@@ -3,7 +3,7 @@ var router = express.Router();
 var user = require("./users.route");
 var auth = require("./auths.route");
 var userPlan = require("./userPlans.route");
-
+var upload = multer({ dest: 'uploads/' })
 
 
 
@@ -25,7 +25,7 @@ router.post('/api/v1/users/bulkCreate', user.createBulkUser);
 
 // Route for UserPlan
 router.get('/api/v1/userPlan/getPlans', userPlan.getPlanAllPlans);
-router.post('/api/v1/userPlan/createUserPlan', userPlan.savePlan);
+router.post('/api/v1/userPlan/createUserPlan',upload.single('file'), userPlan.savePlan);
 // router.get('/api/v1/userPlan/findByUsername', user.findByUserName);
 // router.put('/api/v1/userPlan/updateUser', user.updateUser);
 // router.delete('/api/v1/userPlan/deleteUser', user.deleteUser);

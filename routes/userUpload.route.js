@@ -27,23 +27,8 @@ var userUploadOBJ = {
 
     saveUpload: function (req, res) {
 
-        var userplanOBJ = {
-            planName: "planName002",
-            reviewer: "admin",
-            owner: "san",
-            coPlanners: ['plan001', 'plan002', 'plan003', 'plan004', 'plan005']
-
-        }
-        userUploadModel.create(userplanOBJ, function (err, results) {
-            if (err) throw new Error("Error in Saving ");
-            else {
-                return res.json({
-                    "message": "UserPlan has been saved !!!!",
-
-                })
-            }
-
-        });
+         console.log("DSDASD"+req);
+       
     },
 
     // updateUser: function (req, res) {

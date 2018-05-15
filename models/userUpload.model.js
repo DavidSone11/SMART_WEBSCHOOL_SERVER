@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var uerUploadSchema = new mongoose.Schema({
-    data: String,
+    img: { data: Buffer, contentType: String },
     dataType: String,
     fileType: String,
     originalFileName: String,
