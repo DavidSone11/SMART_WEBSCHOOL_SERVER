@@ -24,11 +24,17 @@ var userUploadOBJ = {
         });
     },
 
+    findByfilename: function (req, res) {
+        var name = req.query.name;
+        var query = userUploadModel.find({ "filename": name });
+        query.exec(function(err,results){
+            if(err) return console.log(err);
+            return res.json(results);
+         });
+
+    },
 
     saveUpload: function (req, res) {
-
-        console.log("DSDASD" + req);
-
         fileName = req.file.originalname;
         console.log(fileName);
         var file = __dirname + "/" + req.file.name;
@@ -44,6 +50,7 @@ var userUploadOBJ = {
             userUploadModelOBJ.img.contentType = 'image/png';
             userUploadModelOBJ.fileType = 'image/png',
                 userUploadModelOBJ.originalFileName = fileName,
+                userUploadModelOBJ.filename = removeExtension(fileName),
                 userUploadModelOBJ.uploadedBy = "SANTOSH",
                 userUploadModelOBJ.message = "SUCCESSFULLY UPLOADED",
                 userUploadModelOBJ.save(function (err, results) {
@@ -93,6 +100,10 @@ var userUploadOBJ = {
 
 
 
+}
+
+function removeExtension(f) {
+    return f.substr(0, f.lastIndexOf('.'));
 }
 
 
