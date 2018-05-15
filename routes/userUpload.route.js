@@ -28,6 +28,17 @@ var userUploadOBJ = {
     saveUpload: function (req, res) {
 
          console.log("DSDASD"+req);
+
+         fileName = req.file.originalname;
+        console.log(fileName);
+        var file = __dirname + "/" + req.file.name;
+        console.log("File Path : " + req.file.path);
+        var filePath = req.file.path;
+        fs.readFile(req.file.path, function (err, data) {
+
+
+
+        });
        
     },
 

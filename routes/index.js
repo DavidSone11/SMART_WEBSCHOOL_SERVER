@@ -3,7 +3,8 @@ var router = express.Router();
 var user = require("./users.route");
 var auth = require("./auths.route");
 var userPlan = require("./userPlans.route");
-var upload = multer({ dest: 'uploads/' })
+var multer  = require("multer");
+var upload = multer({ dest: './uploads' })
 
 
 
