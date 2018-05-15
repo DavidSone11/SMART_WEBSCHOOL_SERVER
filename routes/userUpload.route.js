@@ -26,11 +26,11 @@ var userUploadOBJ = {
 
     findByfilename: function (req, res) {
         var name = req.query.name;
-        var query = userUploadModel.find({ "filename": name });
-        query.exec(function(err,results){
-            if(err) return console.log(err);
+        var query = userUploadModel.find({ "filename": new RegExp('^' + name + '$', "i") });
+        query.exec(function (err, results) {
+            if (err) return console.log(err);
             return res.json(results);
-         });
+        });
 
     },
 
