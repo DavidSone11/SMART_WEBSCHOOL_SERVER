@@ -27,20 +27,39 @@ var userUploadOBJ = {
 
     saveUpload: function (req, res) {
 
-         console.log("DSDASD"+req);
+        console.log("DSDASD" + req);
 
-         fileName = req.file.originalname;
+        fileName = req.file.originalname;
         console.log(fileName);
         var file = __dirname + "/" + req.file.name;
         console.log("File Path : " + req.file.path);
         var filePath = req.file.path;
+
+        var userUploadModelOBJ = new userUploadModel();
+
         fs.readFile(req.file.path, function (err, data) {
 
 
+            userUploadModelOBJ.img.data = data;
+            userUploadModelOBJ.img.contentType = 'image/png';
+            userUploadModelOBJ.fileType = 'image/png',
+                userUploadModelOBJ.originalFileName = fileName,
+                userUploadModelOBJ.uploadedBy = "SANTOSH",
+                userUploadModelOBJ.message = "SUCCESSFULLY UPLOADED",
+                userUploadModelOBJ.save(function (err, results) {
+                    if (err) throw err;
 
-        });
-       
-    },
+                    res.status(201);
+                    res.json({
+                        "status": 200,
+                        "message": "FIle Upload Successfully!!!!"
+                    })
+
+
+                });
+
+        })
+    }
 
     // updateUser: function (req, res) {
     //     return new Promise(function (resolve, reject) {
