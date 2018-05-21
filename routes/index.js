@@ -45,4 +45,13 @@ router.post('/api/v1/userUpload/saveUpload',upload.single('file'), require("./us
 // router.post('/api/v1/userPlan/bulkCreate', user.createBulkUser);
 
 
+
+
+
+// Route for UserFile Upload
+
+router.get('/api/v1/userFileUpload/getAllUserUpload', require("./userFileUpload.route").getllUserUpload);
+router.post('/api/v1/userFileUpload/saveUserFileUpload',require("./userFileUpload.route").saveUserFileUpload);
+
+
 module.exports = router;

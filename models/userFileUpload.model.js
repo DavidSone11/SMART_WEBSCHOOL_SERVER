@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var userFileUploadSchema = new mongoose.Schema({
     data: { type: String, lowercase: false },
-    dataType: { type: String, lowercase: false },
+    fileName: { type: String, lowercase: false },
+    extension: { type: String, lowercase: false },
     fileType: { type: String, lowercase: false },
     originalFileName: { type: String, lowercase: false },
     uploadedBy: { type: String, lowercase: false },
