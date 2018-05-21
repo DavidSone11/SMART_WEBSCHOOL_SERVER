@@ -38,7 +38,7 @@ router.post('/api/v1/userPlan/createUserPlan', userPlan.savePlan);
 // Route for UserPlan
 router.get('/api/v1/userUpload/getAllUserUpload', require("./userUpload.route").getllUpload);
 router.get('/api/v1/userUpload/findByfilename', require("./userUpload.route").findByfilename);
-router.post('/api/v1/userUpload/createUserUpload',upload.single('file'), require("./userUpload.route").saveUpload);
+router.post('/api/v1/userUpload/saveUpload',upload.single('file'), require("./userUpload.route").saveUpload);
 // router.get('/api/v1/userPlan/findByUsername', user.findByUserName);
 // router.put('/api/v1/userPlan/updateUser', user.updateUser);
 // router.delete('/api/v1/userPlan/deleteUser', user.deleteUser);

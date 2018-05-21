@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
-var uerUploadSchema = new mongoose.Schema({
+var userUploadSchema = new mongoose.Schema({
     img: { data: Buffer, contentType: String },
-    fileType: String,
-    originalFileName: String,
-    filename: String,
-    uploadedBy: String,
-    message: String,
+    fileType: { type: String, lowercase: false },
+    originalFileName: { type: String, lowercase: false },
+    filename: { type: String, lowercase: false },
+    uploadedBy: { type: String, lowercase: false },
+    message: { type: String, lowercase: false },
     markDelete: { type: Boolean, default: false },
     uploadedTime: { type: Date, default: Date.now }
 })
-module.exports = mongoose.model('uerUploads', uerUploadSchema);
+module.exports = mongoose.model('userUpload', userUploadSchema);
