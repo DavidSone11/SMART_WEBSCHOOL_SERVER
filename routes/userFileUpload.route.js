@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var userUploadModel = require("../models/userUpload.model")
+var userFileUpload = require("../models/userFileUpload.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
+var fileUpload = require('express-fileupload');
 var fs = require('fs');
 
 
@@ -15,24 +16,17 @@ var userFileUploadOBJ = {
             page: parseInt(req.query.page) || 1,
             order: req.query.order || 'originalFileName'
         };
-       
+
     },
 
     findByfilename: function (req, res) {
-      
+
 
     },
 
     saveUpload: function (req, res) {
-      
+
     }
-
-    
-
-
-
-
-
 
 }
 
