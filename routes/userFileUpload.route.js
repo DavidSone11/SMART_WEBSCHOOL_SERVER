@@ -3,7 +3,7 @@ var router = express.Router();
 var userFileUpload = require("../models/userFileUpload.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
-var fileUpload = require('express-fileupload');
+
 var fs = require('fs');
 
 

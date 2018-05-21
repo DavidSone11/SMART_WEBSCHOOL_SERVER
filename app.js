@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
+var fileUpload = require('express-fileupload');
 var db = require('./database/db');
 var indexRouter = require('./routes/index');
 
@@ -13,6 +14,9 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 app.use(cors())
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
