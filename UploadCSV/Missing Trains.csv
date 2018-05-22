@@ -1,0 +1,10 @@
+"_id",trainNo,trainName,fromStation,toStation,trainType,locoType,createdTime,markDelete,runningDays.0,runningDays.1,runningDays.2,runningDays.3,runningDays.4,runningDays.5,runningDays.6
+572205cff47cd3e416042599,12914,TRISHATABDI EXP,null,null,SUF,Electric,2016-04-28T12:45:03.500Z,false,1,,,,,,
+572205d2f47cd3e416042a2a,18623,RJPB PNBE HTE EXPRESS,null,null,MEX,Electric,2016-04-28T12:45:06.900Z,false,0,1,2,3,4,5,6
+572205d4f47cd3e416042c94,51325,PUNE-DD PASSENGER,null,null,PAS,Electric,2016-04-28T12:45:08.367Z,false,0,1,2,3,4,5,6
+572205d6f47cd3e416043127,55525,BJU-SPJ PASS,null,null,PAS,Electric,2016-04-28T12:45:10.609Z,false,0,1,2,3,4,5,6
+572205d6f47cd3e416043128,55526,SPJ-BJU PASS,null,null,PAS,Electric,2016-04-28T12:45:10.611Z,false,0,1,2,3,4,5,6
+572205d7f47cd3e41604330a,57133,BJP-SUR PASS,null,null,PAS,Electric,2016-04-28T12:45:11.211Z,false,0,1,2,3,4,5,6
+572205d7f47cd3e41604330b,57134,BJP PASS,null,null,PAS,Electric,2016-04-28T12:45:11.212Z,false,0,1,2,3,4,5,6
+572205d7f47cd3e416043374,57515,DD-NED PASS,null,null,PAS,Electric,2016-04-28T12:45:11.327Z,false,0,1,2,3,4,5,6
+572205d7f47cd3e416043375,57516,NED-DD PASS,null,null,PAS,Electric,2016-04-28T12:45:11.328Z,false,0,1,2,3,4,5,6

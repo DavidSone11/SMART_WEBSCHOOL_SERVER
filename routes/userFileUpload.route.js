@@ -5,6 +5,7 @@ var trainstationModel = require("../models/trainstation.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
 var fs = require('fs');
+var csvWrite = require("../library/csv.lib");
 
 var trainListArray = [];
 
@@ -117,12 +118,24 @@ function processToTrain(res) {
             var departureTime = rowdata[5];
             var distance = parseInt(rowdata[6]);
             var locotype = rowdata[7];
-            pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
+        //    pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
 
-            var csvWrite = require("../library/csv.lib");
-            csvWrite.writeToCSV(trainListArray, 'locotype.csv');
+            /// write to csv
+            
+            csvWrite.writeToCSV({
+                trainNo: trainNo,
+                stopNo: stopNo,
+                stationCode: code,
+                dayOfJourney: dayofJourney,
+                arrivalTime: arrivalTime,
+                departureTime: departureTime,
+                distance: distance,
+                locoType: locotype
+            }, 'locotype.csv');
+
+            /// write to DB
             //  trainstationModel.insertMany(trainListArray, function (err, results) {
-            //     if (err) throw err;
+            //     if (err) console.log (err);
             //     console.log("saved Successfully");
             // })
         }
