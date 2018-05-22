@@ -3,9 +3,9 @@ var router = express.Router();
 var userFileUploadModel = require("../models/userFileUpload.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
-
 var fs = require('fs');
 
+var trainListArray = [];
 
 
 
@@ -25,27 +25,18 @@ var userFileUploadOBJ = {
 
     },
 
-    findByfilename: function (filename) {
 
-        return new Promise(function (resolve, reject) {
-            if (!filename)
-                return
-            var query = userFileUploadModel.find({ fileName: filename });
-            query.then(function (res) {
-                resolve(res);
-            }, function (err) {
-                reject(err);
-            });
-
-        });
-
-    },
 
     processUserUpload: function (req, res) {
 
-        userFileUploadOBJ.findByfilename(req.params.fname).then(function (res) {
+        var query = userFileUploadModel.find({ fileName: req.params.fname });
+        query.then(function (res) {
             processToTrain(res);
-        })
+
+        }, function (err) {
+
+        });
+
         return res.json("ok");
     },
 
@@ -98,10 +89,26 @@ function extension(f) {
 }
 
 function processToTrain(res) {
-
     var d = res[0]._doc.data;
-    // console.log(d);
-    var dd = d.replace(/(\r\n\t|\n|\r\t)/gm, "");
+    var dd = d.replace(/(\r\n|\n|\r)/gm, " ");
+    var cc = dd.split(",");
+    for (var i = 0; i < cc.length; i++) {
+        var trainNo = cc[11];
+        pustToTrainArray(cc[11],cc[12],cc[13],cc[14],cc[15],cc[16],cc[17],cc[18]);
+    }
+}
+
+function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
+    trainListArray.push({
+        trainNo: trainNo,
+        stopNo: stopNo,
+        stationCode: code,
+        dayOfJourney: dayOfJourney,
+        arrivalTime: arrivalTime,
+        departureTime: departureTime,
+        distance: distance,
+        locoType: locoType
+    })
 }
 
 
