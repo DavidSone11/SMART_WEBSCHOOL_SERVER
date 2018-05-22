@@ -110,18 +110,22 @@ function processToTrain(res) {
 
         for (var i = 1; i < rows.length; i++) {
             var rowdata = rows[i].split(",");
-            var trainNo = parseInt(rowdata[0]);
-            var stopNo = parseInt(rowdata[1]);
+            //  var trainNo = parseInt(rowdata[0]);
+            var trainNo = rowdata[0];
+            // var stopNo = parseInt(rowdata[1]);
+            var stopNo = rowdata[1];
             var code = rowdata[2];
-            var dayofJourney = parseInt(rowdata[3]);
+            // var dayofJourney = parseInt(rowdata[3]);
+            var dayofJourney = rowdata[3];
             var arrivalTime = rowdata[4];
             var departureTime = rowdata[5];
-            var distance = parseInt(rowdata[6]);
+            // var distance = parseInt(rowdata[6]);
+            var distance = rowdata[6];
             var locotype = rowdata[7];
-        //    pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
+            //    pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
 
             /// write to csv
-            
+
             csvWrite.writeToCSV({
                 trainNo: trainNo,
                 stopNo: stopNo,

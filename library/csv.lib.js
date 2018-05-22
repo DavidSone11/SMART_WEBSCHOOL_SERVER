@@ -9,8 +9,8 @@ var csvOBJ = {
     writeToCSV: function (writeDATA,filename) {
         //var writer = csvWriter({ headers: csvOBJ.createHeaders()});
         
-        var writer =  csvWritercsvWriter();
-        writer.pipe(fs.createWriteStream(pathTo + filename))
+        var writer =  csvWriter();
+        writer.pipe(fs.createWriteStream(filename))
         writer.write(writeDATA)
         writer.end()
     },
