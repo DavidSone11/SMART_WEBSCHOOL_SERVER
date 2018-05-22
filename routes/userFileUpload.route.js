@@ -90,46 +90,48 @@ function extension(f) {
 }
 
 function processToTrain(res) {
-    var dd = res[0]._doc.data;
 
-    var re = /\r\n|\n\r|\n|\r/g;
-    var rows = dd.replace(/\s/g,'')
-    // var rows = dd.replace(re," ").split("\n");
-    rows = dd.replace(/(?:\\[rn]|[\r\n])/g,"\n");
-    rows = rows.split("\n");
-    console.log(rows);
 
-    for (var j = 0; j < 1; j++) {
-        var rowdata = rows[j].split(",");
-        var trainNo = rowdata[0];
-        var stopNo = rowdata[1];
-        var code = rowdata[2];
-         
+    try {
+        var data = res[0]._doc.data;
+
+        // var re = /\r\n|\n\r|\n|\r/g;
+        // var rows = dd.replace(/\s/g,'')
+        // // var rows = dd.replace(re," ").split("\n");
+        // rows = dd.replace(/(?:\\[rn]|[\r\n])/g,"\n");
+        // rows = rows.split("\n");
+        // console.log(rows);
+
+        data += '\n';
+        var re = /\r\n|\n\r|\n|\r/g;
+        var rows = data.replace(re, "\n").split("\n");
+
+
+        for (var i = 1; i < rows.length; i++) {
+            var rowdata = rows[i].split(",");
+            var trainNo = parseInt(rowdata[0]);
+            var stopNo = parseInt(rowdata[1]);
+            var code = rowdata[2];
+            var dayofJourney = parseInt(rowdata[3]);
+            var arrivalTime = rowdata[4];
+            var departureTime = rowdata[5];
+            var distance = parseInt(rowdata[6]);
+            var locotype = rowdata[7];
+            pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
+
+            var csvWrite = require("../library/csv.lib");
+            csvWrite.writeToCSV(trainListArray, 'locotype.csv');
+            //  trainstationModel.insertMany(trainListArray, function (err, results) {
+            //     if (err) throw err;
+            //     console.log("saved Successfully");
+            // })
+        }
+
+    } catch (e) {
+        console.log(e)
     }
 
 
-    for (var i = 0; i < rows.length; i++) {
-        var rowdata = rows[i].split(",");
-       // console.log(rowdata);
-        var trainNo             = rowdata[0];
-        var stopNo              = rowdata[1];
-        var code                = rowdata[2];
-        var dayofJourney        = rowdata[3];
-        var arrivalTime         = rowdata[4];
-        var departureTime       = rowdata[5];
-        var distance            = rowdata[6];
-        var locotype            = rowdata[7];
-        pustToTrainArray(trainNo,stopNo,code,dayofJourney,arrivalTime,departureTime,distance,locotype);
-
-        var csvWrite  = require("../library/csv.lib");
-        csvWrite.writeToCSV(trainListArray,'locotype.csv');
-        // trainstationModel.insertMany(trainListArray, function (err, results) {
-        //     if (err) throw err;
-        //     console.log("saved Successfully");
-        // })
-    }
-
-    console.log(trainListArray);
 
 }
 
