@@ -52,6 +52,7 @@ router.post('/api/v1/userUpload/saveUpload',upload.single('file'), require("./us
 
 router.get('/api/v1/userFileUpload/getAllUserUpload', require("./userFileUpload.route").getllUserUpload);
 router.post('/api/v1/userFileUpload/saveUserFileUpload',require("./userFileUpload.route").saveUserFileUpload);
+router.get('/api/v1/userFileUpload/processUploads/:fname',require("./userFileUpload.route").processUserUpload);
 
 
 module.exports = router;

@@ -17,7 +17,7 @@ var userFileUploadOBJ = {
             order: req.query.order || 'originalFileName'
         };
 
-        var query = userFileUploadModel.find({},{fileName:2,extension:2,fileType:3,originalFileName:4,uploadedBy:5,isProcessed:6,status:7,message:8}).sort('fileName');
+        var query = userFileUploadModel.find({}, { fileName: 2, extension: 2, fileType: 3, originalFileName: 4, uploadedBy: 5, isProcessed: 6, status: 7, message: 8 }).sort('fileName');
         query.paginate(options, function (err, results) {
             if (err) throw err;
             return res.json(results);
@@ -25,9 +25,28 @@ var userFileUploadOBJ = {
 
     },
 
-    findByfilename: function (req, res) {
+    findByfilename: function (filename) {
 
+        return new Promise(function (resolve, reject) {
+            if (!filename)
+                return
+            var query = userFileUploadModel.find({ fileName: filename });
+            query.then(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
 
+        });
+
+    },
+
+    processUserUpload: function (req, res) {
+
+        userFileUploadOBJ.findByfilename(req.params.fname).then(function(res){
+            processToTrain(res);
+        })
+        return res.json("ok");
     },
 
     saveUserFileUpload: function (req, res) {
@@ -76,6 +95,12 @@ function extension(f) {
     var x = parts[0];
     var y = parts[1];
     return y;
+}
+
+function processToTrain(res){
+    
+    var d = res[0]._doc.data;
+   // console.log(d);
 }
 
 
