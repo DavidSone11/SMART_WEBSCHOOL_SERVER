@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userFileUploadModel = require("../models/userFileUpload.model")
+var trainListModel = require("../models/trainList.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
 var fs = require('fs');
@@ -93,9 +94,15 @@ function processToTrain(res) {
     var dd = d.replace(/(\r\n|\n|\r)/gm, " ");
     var cc = dd.split(",");
     for (var i = 0; i < cc.length; i++) {
-        var trainNo = cc[11];
-        pustToTrainArray(cc[11],cc[12],cc[13],cc[14],cc[15],cc[16],cc[17],cc[18]);
+        
+        pustToTrainArray(cc[7], cc[8], cc[9], cc[10], cc[11], cc[12], cc[13], cc[14]);
     }
+
+    console.log(trainListArray);
+    trainListModel.insertMany(trainListArray, function (err, results) {
+        if (err) throw err;
+        console.log("saved Successfully");
+    })
 }
 
 function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
