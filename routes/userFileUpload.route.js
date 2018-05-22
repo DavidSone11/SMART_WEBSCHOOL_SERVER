@@ -17,7 +17,7 @@ var userFileUploadOBJ = {
             order: req.query.order || 'originalFileName'
         };
 
-        var query = userFileUploadModel.find({},{fileType:1,originalFileName:2}).sort('fileName');
+        var query = userFileUploadModel.find({},{fileName:2,extension:2,fileType:3,originalFileName:4,uploadedBy:5,isProcessed:6,status:7,message:8}).sort('fileName');
         query.paginate(options, function (err, results) {
             if (err) throw err;
             return res.json(results);
