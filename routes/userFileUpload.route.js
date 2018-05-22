@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userFileUploadModel = require("../models/userFileUpload.model")
-var trainListModel = require("../models/trainList.model")
+var trainstationModel = require("../models/trainstation.model")
 var Promise = require("bluebird");
 require('mongoose-query-paginate');
 var fs = require('fs');
@@ -90,19 +90,47 @@ function extension(f) {
 }
 
 function processToTrain(res) {
-    var d = res[0]._doc.data;
-    var dd = d.replace(/(\r\n|\n|\r)/gm, " ");
-    var cc = dd.split(",");
-    for (var i = 0; i < cc.length; i++) {
-        
-        pustToTrainArray(cc[7], cc[8], cc[9], cc[10], cc[11], cc[12], cc[13], cc[14]);
+    var dd = res[0]._doc.data;
+
+    var re = /\r\n|\n\r|\n|\r/g;
+    var rows = dd.replace(/\s/g,'')
+    // var rows = dd.replace(re," ").split("\n");
+    rows = dd.replace(/(?:\\[rn]|[\r\n])/g,"\n");
+    rows = rows.split("\n");
+    console.log(rows);
+
+    for (var j = 0; j < 1; j++) {
+        var rowdata = rows[j].split(",");
+        var trainNo = rowdata[0];
+        var stopNo = rowdata[1];
+        var code = rowdata[2];
+         
+    }
+
+
+    for (var i = 0; i < rows.length; i++) {
+        var rowdata = rows[i].split(",");
+       // console.log(rowdata);
+        var trainNo             = rowdata[0];
+        var stopNo              = rowdata[1];
+        var code                = rowdata[2];
+        var dayofJourney        = rowdata[3];
+        var arrivalTime         = rowdata[4];
+        var departureTime       = rowdata[5];
+        var distance            = rowdata[6];
+        var locotype            = rowdata[7];
+        pustToTrainArray(trainNo,stopNo,code,dayofJourney,arrivalTime,departureTime,distance,locotype);
+
+        var csvWrite  = require("../library/csv.lib");
+        csvWrite.writeToCSV(trainListArray,'locotype.csv');
+        trainstationModel.insertMany(trainListArray, function (err, results) {
+            if (err) throw err;
+            console.log("saved Successfully");
+        })
     }
 
     console.log(trainListArray);
-    trainListModel.insertMany(trainListArray, function (err, results) {
-        if (err) throw err;
-        console.log("saved Successfully");
-    })
+
 }
 
 function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
@@ -115,7 +143,9 @@ function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, depa
         departureTime: departureTime,
         distance: distance,
         locoType: locoType
-    })
+    });
+
+
 }
 
 
