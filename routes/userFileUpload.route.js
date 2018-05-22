@@ -122,27 +122,20 @@ function processToTrain(res) {
             // var distance = parseInt(rowdata[6]);
             var distance = rowdata[6];
             var locotype = rowdata[7];
-            //    pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
+            //pustToTrainArrayOBJ(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
+            pustToTrainArray(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
 
-            /// write to csv
-
-            csvWrite.writeToCSV({
-                trainNo: trainNo,
-                stopNo: stopNo,
-                stationCode: code,
-                dayOfJourney: dayofJourney,
-                arrivalTime: arrivalTime,
-                departureTime: departureTime,
-                distance: distance,
-                locoType: locotype
-            }, 'locotype.csv');
+           
 
             /// write to DB
-            //  trainstationModel.insertMany(trainListArray, function (err, results) {
-            //     if (err) console.log (err);
-            //     console.log("saved Successfully");
-            // })
+             trainstationModel.insertMany(trainListArray, function (err, results) {
+                if (err) console.log (err);
+                console.log("saved Successfully");
+            })
+            
+            
         }
+       
 
     } catch (e) {
         console.log(e)
@@ -152,7 +145,7 @@ function processToTrain(res) {
 
 }
 
-function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
+function pustToTrainArrayOBJ(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
     trainListArray.push({
         trainNo: trainNo,
         stopNo: stopNo,
@@ -163,6 +156,16 @@ function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, depa
         distance: distance,
         locoType: locoType
     });
+
+
+}
+
+function pustToTrainArray(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
+
+    
+        trainListArray.push(0,trainNo);  
+        trainListArray.push(1,stopNo);    
+    
 
 
 }
