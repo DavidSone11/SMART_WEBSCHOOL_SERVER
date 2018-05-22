@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var trainStationSchema = new mongoose.Schema({
-    trainNo: Number,
-    stopNo: Number,
+    trainNo: {type:Number,required: true},
+    stopNo: {type:Number,required: true},
     stationCode: String,
     arrivalTime: String,
     departureTime: String,
@@ -11,8 +11,8 @@ var trainStationSchema = new mongoose.Schema({
     departureDateTime: { type: Date },
     arrivalDay: { type: Number },
     departureDay: { type: Number },
-    dayOfJourney: { type: Number },
-    distance: { type: Number },
+    dayOfJourney: {type:Number,required: true},
+    distance: {type:Number,required: true},
     locoType: String,
     isLocoChange: { type: Boolean, default: false },
     markDelete: { type: Boolean, default: false },
