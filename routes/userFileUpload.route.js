@@ -43,7 +43,7 @@ var userFileUploadOBJ = {
 
     processUserUpload: function (req, res) {
 
-        userFileUploadOBJ.findByfilename(req.params.fname).then(function(res){
+        userFileUploadOBJ.findByfilename(req.params.fname).then(function (res) {
             processToTrain(res);
         })
         return res.json("ok");
@@ -97,10 +97,11 @@ function extension(f) {
     return y;
 }
 
-function processToTrain(res){
-    
+function processToTrain(res) {
+
     var d = res[0]._doc.data;
-   // console.log(d);
+    // console.log(d);
+    var dd = d.replace(/(\r\n\t|\n|\r\t)/gm, "");
 }
 
 
