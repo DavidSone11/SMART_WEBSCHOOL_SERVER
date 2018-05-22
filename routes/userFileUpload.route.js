@@ -123,10 +123,10 @@ function processToTrain(res) {
 
         var csvWrite  = require("../library/csv.lib");
         csvWrite.writeToCSV(trainListArray,'locotype.csv');
-        trainstationModel.insertMany(trainListArray, function (err, results) {
-            if (err) throw err;
-            console.log("saved Successfully");
-        })
+        // trainstationModel.insertMany(trainListArray, function (err, results) {
+        //     if (err) throw err;
+        //     console.log("saved Successfully");
+        // })
     }
 
     console.log(trainListArray);

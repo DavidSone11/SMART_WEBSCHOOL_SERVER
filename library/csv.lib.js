@@ -1,11 +1,11 @@
 var csvWriter = require('csv-write-stream')
 var writer = csvWriter()
-
+var fs = require('fs');
 
 var csvOBJ = {
 
     writeToCSV: function (writeDATA,filename) {
-        var writer = csvWriter({ headers: createHeaders()});
+        var writer = csvWriter({ headers: csvOBJ.createHeaders()});
         writer.pipe(fs.createWriteStream(filename))
         writer.write(writeDATA)
         writer.end()
