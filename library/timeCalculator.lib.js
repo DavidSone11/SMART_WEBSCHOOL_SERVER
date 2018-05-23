@@ -71,10 +71,20 @@ var diffDateTimeObj = function () {
 var convertMinsToHrsMins = function (minutes) {
     var h = Math.floor(minutes / 60);
     var m = minutes % 60;
-    h = h < 10 ? '0' + h : h;
-    m = m < 10 ? '0' + m : m;
+    h = (h < 10) ? '0' + h : h;
+    m = (m < 10) ? '0' + m : m;
     return h + ':' + m;
 
+}
+
+var toHourMinutes = function (min) {
+    var r = null;
+    var hh = Math.trunc(min / 60);
+    var mm = min % 60;
+    hh = (hh < 10) ? '0' + hh : hh;
+    mm = (mm < 10) ? '0' + mm : mm;
+    r = hh + ":" + mm;
+    return r;
 }
 
 
@@ -85,3 +95,4 @@ exports.convertNumberToDateTimeObj = convertNumberToDateTimeObj;
 exports.convertMinsToHrsMins = convertMinsToHrsMins;
 exports.addDateTimeObj = addDateTimeObj;
 exports.diffDateTimeObj = diffDateTimeObj;
+exports.toHourMinutes = toHourMinutes;
