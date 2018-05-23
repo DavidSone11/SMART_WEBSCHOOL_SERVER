@@ -31,15 +31,22 @@ var convertDateTimeObjToNumber = function (dateTimeObj, target) {
               // Check correct time format and split into components
             dateTimeObj.stime  = dateTimeObj.stime.match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [dateTimeObj.stime ];
             if (dateTimeObj.stime.length > 0) { 
-                var timeParts = dateTimeObj.stime[0].split(":");
-                timeParts[0] = parseInt(timeParts[0]);
-                timeParts[1] = parseInt(timeParts[1]);
+                var tParts = dateTimeObj.stime[0].split(":");
+                tParts[0] = parseInt(tParts[0]);
+                tParts[1] = parseInt(tParts[1]);
+
+                if((tParts[0]>23 || tParts[0]<0) || (tParts[1]>59 || tParts[1]<0)){
+                    console.log("Invalide date format");
+                }
                 
+                var mins = (dateTimeObj.nday * 1440) + (tParts[0]*60) + tParts[1];
                
                 // formula to convert day and time to number
 
 
-
+                var ss = mins.toLocaleString();
+                var ff= require("../Prototypes/trim.prop");
+                ff.trimFun("lllll");
 
             }
         }
