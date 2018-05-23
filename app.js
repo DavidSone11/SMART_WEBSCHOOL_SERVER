@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors')
 var fileUpload = require('express-fileupload');
 var db = require('./database/db');
+// var mongodb = require('./database/mongo.db');
 var indexRouter = require('./routes/index');
 
 
