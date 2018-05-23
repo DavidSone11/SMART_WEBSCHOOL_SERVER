@@ -8,6 +8,8 @@ var fileUpload = require('express-fileupload');
 var db = require('./database/db');
 // var mongodb = require('./database/mongo.db');
 var indexRouter = require('./routes/index');
+var timecalOBJ = require('./library/timeCalculator.lib');
+
 
 
 
@@ -69,5 +71,8 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+timecalOBJ.convertDateTimeObjToNumber({day:'1',time:'14:30'});
 
 module.exports = app;

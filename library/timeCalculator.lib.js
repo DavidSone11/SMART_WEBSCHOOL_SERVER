@@ -1,4 +1,7 @@
 var convertDateTimeObjToNumber = function(dateTimeObj,target){
+    if(typeof dateTimeObj !== 'object' || dateTimeObj==null){
+        throw new IllegalArgumentException();
+    }
 
 }
 
