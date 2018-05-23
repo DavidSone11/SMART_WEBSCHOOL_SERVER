@@ -20,6 +20,7 @@
     "csv-write-stream": "^2.0.0",
     "csv-writer": "^1.0.0",
     "express-fileupload": "^0.4.0",
+    "jsdoc": "^3.5.5",
     "json2csv": "latest",
     "jsonwebtoken": "^8.2.0",
     "moment": "^2.22.1",

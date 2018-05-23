@@ -74,8 +74,11 @@ app.use(function (err, req, res, next) {
 });
 
 
-//console.log(timecalOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:45"},"day"));
+console.log(timecalOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:45"},"hour"));
+console.log(timecalOBJ.convertNumberToDateTimeObj(1748,"+"));
+console.log(timecalOBJ.convertMinsToHrsMins(1748));
 
-console.log(timecalmomentOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:30"}));
+
+//console.log(timecalmomentOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:30"}));
 
 module.exports = app;
