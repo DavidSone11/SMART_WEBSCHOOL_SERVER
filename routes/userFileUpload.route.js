@@ -6,6 +6,7 @@ var Promise = require("bluebird");
 require('mongoose-query-paginate');
 var fs = require('fs');
 var csvWrite = require("../library/csv.lib");
+var timeCAL = require("../library/timeCalculator.lib");
 
 var trainListArray = [];
 
@@ -118,6 +119,8 @@ function processToTrain(res) {
             var departureTime = rowdata[5];
             var distance = rowdata[6];
             var locotype = rowdata[7];
+
+            var arrivalTimeMinutes = timeCAL.convertDateTimeObjToNumber({ day: arrivalDay, time: arrivalTime });
             pushToTrainArrayOBJ(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
            
     
