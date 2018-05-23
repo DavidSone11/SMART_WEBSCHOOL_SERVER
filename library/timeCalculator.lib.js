@@ -1,6 +1,10 @@
+"use strict";
 var convertDateTimeObjToNumber = function(dateTimeObj,target){
     if(typeof dateTimeObj !== 'object' || dateTimeObj==null){
-        throw new IllegalArgumentException();
+        //throw new IllegalArgumentException();
+        var NameError = createErrorType('NameError', function (name, invalidChar) {
+            this.message = 'The name ' + name + ' may not contain ' + invalidChar;
+          });
     }
 
 }
