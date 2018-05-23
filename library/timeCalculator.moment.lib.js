@@ -24,10 +24,13 @@ var convertDateTimeObjToNumber = function (dateTimeObj, target) {
         if (dateTimeObj.stime.length > 0) {
             //var parts = dateTimeObj.stime[0].split(":");
 
-            const startTime = '12:30:00';
-            const durationInMinutes = '120';
+            var startTime = '12:30';
+            var durationInMinutes = 120 ||'120';
+            var dy = 1 ||'1';
 
-            const endTime = moment(startTime, 'HH:mm:ss').add(durationInMinutes, 'minutes').format('HH:mm');
+            // var endTime = moment(startTime, 'HH:mm').add(durationInMinutes, 'minutes').format('HH:mm');
+            var endTime = moment(startTime, 'HH:mm').add(dy, 'days').format("mm"); 
+
 
         }
     }

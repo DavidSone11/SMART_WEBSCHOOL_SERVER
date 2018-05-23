@@ -35,8 +35,7 @@ var convertDateTimeObjToNumber = function (dateTimeObj, target) {
                 timeParts[0] = parseInt(timeParts[0]);
                 timeParts[1] = parseInt(timeParts[1]);
                 
-                var date = new Date();
-                date = date.toLocaleTimeString();
+               
                 // formula to convert day and time to number
 
 
