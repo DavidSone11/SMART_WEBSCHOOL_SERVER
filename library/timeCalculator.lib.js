@@ -2,7 +2,11 @@
 var createErrorType = require('../exception/custom.exception');
 var CustomError = require('../exception/custom-error');
 
-
+/**
+ *  A function to convert DateTime object to Number
+ * @param {object} dateTimeObj - {{day:1,time:'5:05'}}.
+ * @param {string} conversionUnits - mins,hrs,days
+ */
 
 var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
     if (typeof dateTimeObj !== 'object' || dateTimeObj == null || typeof dateTimeObj === "undefined") {
@@ -79,7 +83,7 @@ var convertMinsToHrsMins = function (minutes) {
 
 var toHourMinutes = function (min, sType) {
     var r = null;
-    if(sType==null){
+    if (sType == null) {
         sType = "";
     }
     sType = sType.toLowerCase();
@@ -99,7 +103,7 @@ var toHourMinutes = function (min, sType) {
             r = hh + ":" + mm;
             break;
         default:
-            r = "Please provide sType to the toHourMinutes()" 
+            r = "Please provide sType to the toHourMinutes()"
 
     }
 
