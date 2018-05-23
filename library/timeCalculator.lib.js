@@ -2,16 +2,28 @@
 var createErrorType = require('../exception/custom.exception');
 var CustomError = require('../exception/custom-error');
 var convertDateTimeObjToNumber = function (dateTimeObj, target) {
-    if (typeof dateTimeObj !== 'object' || dateTimeObj == null) {
-        //throw new IllegalArgumentException();
-        // var NameError = createErrorType('NameError', function (name, invalidChar) {
-        //     this.message = 'The name ' + name + ' may not contain ' + invalidChar;
-        //   });
-        //callback(new CustomError(404, 'Not found!'));
 
-        throw new CustomError(500, 'Server Error!');
+    
+        if (typeof dateTimeObj !== 'object' || dateTimeObj == null ||typeof dateTimeObj === "undefined") {
+            throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+        }
+        if(dateTimeObj.nday !==null || typeof dateTimeObj.nday ==="undefined"){
+            throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+        }
+        if(dateTimeObj.stime !==null || typeof dateTimeObj.stime ==="undefined"){
+            throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+        }
 
-    }
+
+
+        if (typeof dateTimeObj.stime === 'string' || dateTimeObj.stime instanceof String){
+            console.log(" string ");
+        }else{
+            console.log("not string ");
+        }
+        
+    
+
 
 }
 
