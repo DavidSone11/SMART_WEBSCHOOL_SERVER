@@ -1,8 +1,8 @@
 "use strict";
 var moment = require('moment');
 moment().format();
-var createErrorType = require('../exception/custom.exception');
-var CustomError = require('../exception/custom-error');
+
+
 var convertDateTimeObjToNumber = function (dateTimeObj, target) {
 
 
@@ -27,27 +27,14 @@ var convertDateTimeObjToNumber = function (dateTimeObj, target) {
             var startTime = '12:30';
             var durationInMinutes = 120 ||'120';
             var dy = 1 ||'1';
-
-            // var endTime = moment(startTime, 'HH:mm').add(durationInMinutes, 'minutes').format('HH:mm');
-            var endTime = moment(startTime, 'HH:mm').add(dy, 'days').format("mm"); 
+            
+            return moment(startTime, 'HH:mm').add(durationInMinutes, 'minutes').format('HH:mm');
+            // return endTime = moment(startTime, 'HH:mm').add(dy, 'days').format("mm"); 
 
 
         }
     }
-
-
-
-
 }
 
 
-
-
-var timeCalculator = {
-    convertDateTimeObjToNumber: convertDateTimeObjToNumber,
-    // convertNumberToDateTimeObj: convertNumberToDateTimeObj,
-    // addDateTimeObj: addDateTimeObj,
-    // diffDateTimeObj: diffDateTimeObj
-}
-
-module.exports = timeCalculator;
+exports.convertDateTimeObjToNumber = convertDateTimeObjToNumber;

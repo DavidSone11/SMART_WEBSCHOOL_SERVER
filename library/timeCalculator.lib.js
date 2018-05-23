@@ -36,26 +36,41 @@ var convertDateTimeObjToNumber = function (dateTimeObj, target) {
                 tParts[1] = parseInt(tParts[1]);
 
                 if((tParts[0]>23 || tParts[0]<0) || (tParts[1]>59 || tParts[1]<0)){
-                    console.log("Invalide date format");
+                    throw new Error("Not valid dateTimeObj.time passed to convertDateTimeObj()");
                 }
                 
+                // formula to convert day and time to number
                 var mins = (dateTimeObj.nday * 1440) + (tParts[0]*60) + tParts[1];
                
-                // formula to convert day and time to number
-
-
-                var ss = mins.toLocaleString();
-                var ff= require("../Prototypes/trim.prop");
-                ff.trimFun("lllll");
-
+                var result = null;
+                switch (target) {
+                    case 'mins': case 'min': case 'minutes': case 'minute':
+                        result = mins;
+                        break;
+                    case 'hrs': case 'hr': case 'hours': case 'hour':
+                        result = (mins / 60);
+                        break;
+                    case 'days': case 'day':
+                        result = Math.floor((mins / 1440));
+                        break;
+                    default:
+                        result = mins;
+                        break;
+                }
+                return result;
             }
-        }
+         }
         
-    
+  }
 
+//   exports.convertMinsToHrsMins = function(minutes){
+//     var h = Math.floor(minutes / 60);
+//     var m = minutes % 60;
+//     h = h < 10 ? '0' + h : h;
+//     m = m < 10 ? '0' + m : m;
+//     return h + ':' + m;
 
-}
-
+//   }
 
 
 

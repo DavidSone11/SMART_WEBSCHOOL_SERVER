@@ -73,10 +73,9 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-var a=10;
-//timecalOBJ.convertDateTimeObjToNumber({day:'1',time:'14:30'});
-timecalOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:45"});
 
-// timecalmomentOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:30"});
+//console.log(timecalOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:45"},"day"));
+
+console.log(timecalmomentOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:30"}));
 
 module.exports = app;
