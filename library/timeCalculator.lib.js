@@ -77,13 +77,32 @@ var convertMinsToHrsMins = function (minutes) {
 
 }
 
-var toHourMinutes = function (min) {
+var toHourMinutes = function (min, sType) {
     var r = null;
-    var hh = Math.trunc(min / 60);
-    var mm = min % 60;
-    hh = (hh < 10) ? '0' + hh : hh;
-    mm = (mm < 10) ? '0' + mm : mm;
-    r = hh + ":" + mm;
+    if(sType==null){
+        sType = "";
+    }
+    sType = sType.toLowerCase();
+    switch (sType) {
+        case 'm1': case 'method1':
+            var hh = Math.trunc(min / 60);
+            var mm = min % 60;
+            hh = (hh < 10) ? '0' + hh : hh;
+            mm = (mm < 10) ? '0' + mm : mm;
+            r = hh + ":" + mm;
+            break;
+        case 'm2': case 'method2':
+            var mm = min % 60
+            var hh = (min - mm) / 60
+            hh = (hh < 10) ? '0' + hh : hh;
+            mm = (mm < 10) ? '0' + mm : mm;
+            r = hh + ":" + mm;
+            break;
+        default:
+            r = "Please provide sType to the toHourMinutes()" 
+
+    }
+
     return r;
 }
 
