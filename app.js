@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors')
 var fileUpload = require('express-fileupload');
 var db = require('./database/db');
-var customError = require('./exception/custom.exception');
+
 var indexRouter = require('./routes/index');
 var timecalOBJ = require('./library/timeCalculator.lib');
 

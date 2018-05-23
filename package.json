@@ -25,6 +25,7 @@
     "mongoose": "^5.0.11",
     "mongoose-query-paginate": "^1.0.3",
     "multer": "^1.3.0",
-    "q": "^1.5.1"
+    "q": "^1.5.1",
+    "util": "^0.10.3"
   }
 }
