@@ -61,6 +61,26 @@ var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
 }
 
 
+var convertOBJtoTimeParts_and_Day = function(dateTimeOBJ){
+
+    if (typeof dateTimeOBJ !== 'object' || dateTimeOBJ == null || typeof dateTimeOBJ === "undefined") {
+        throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+    }
+    if (dateTimeOBJ.nday === null || typeof dateTimeOBJ.nday === "undefined") {
+        throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+    }
+    if (dateTimeOBJ.stime === null || typeof dateTimeOBJ.stime === "undefined") {
+        throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+    }
+
+    var results = {};
+
+
+
+    return ;
+}
+
+
 
 var convertNumberToDateTimeObj = function (number, type) {
     if (type == null) {
@@ -219,12 +239,13 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     }
     units = units.toLowerCase();
 
-    var fromMins = convertDateTimeObjToNumber(fromTimeOBJ, units);
-    var toMins = convertDateTimeObjToNumber(toTimeOBJ, units);
+    //var fromMins = convertDateTimeObjToNumber(fromTimeOBJ, units);
+    var mins = (dateTimeObj.nday * 1440) + (tParts[0] * 60) + tParts[1];
+    //var toMins = convertDateTimeObjToNumber(toTimeOBJ, units);
     // console.log(fromTimeOBJ);
     // console.log(toTimeOBJ);
     // console.log(units);
-    var differ = (toMins-fromMins).toFixed(2);;
+    var differ = (toMins-fromMins).toFixed(2);
 
 
 }
