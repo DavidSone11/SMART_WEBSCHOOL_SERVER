@@ -275,14 +275,11 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     fromResults = convertOBJtoTimeParts(fromTimeOBJ, "m1");
     toResults = convertOBJtoTimeParts(toTimeOBJ, "m1");
 
-    // parseToTime(toResults, "min");
-    var r = {
-        day: 1,
-        'timePart-hh': 5,
-        'timePart-mm': 45
-    }
-    //parseToTime(r, "day");
-    console.log(parseToTime(r, "ms"));
+    var from = parseToTime(fromResults, "min");
+    var to = parseToTime(toResults, "min");
+    var diff = to - from;
+
+   
     function parseToTime(timepartsOBJ, units) {
 
         var result = null;
@@ -294,23 +291,14 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
         }
 
         switch (units) {
-            case 'min':
-            case 'mins':
-            case 'minutes':
-            case 'minute':
+            case 'min':case 'mins':case 'minutes':case 'minute':
                 result = mins;
                 break;
-
-            case 'hr':
-            case 'hrs':
-            case 'hour':
-            case 'hours':
+            case 'hr':case 'hrs':case 'hour':case 'hours':
                 // 1785 minutes × 1 hour/60 minutes = 2.5 hours
                 result = mins * 1 / 60;
                 break;
-
-            case 'days':
-            case 'day':
+            case 'days':case 'day':
                 // 1785 minutes / 1440 minutes = 2.5 day
                 result = {
                     'dayInFraction': mins / 1440,
@@ -318,20 +306,13 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
                     'dayInNumber_floor': Math.floor(mins / 1440),
                     'dayInNumber_round': Math.round(mins / 1440)
                 }
-
                 break;
-            case 'sec':
-            case 'secs':
-            case 'second':
-            case 'seconds':
+            case 'sec':case 'secs':case 'second':case 'seconds':
                 // 1785 minutes × 1 hour * 60 sec = 107100 sec
                 result = (mins * 1 * 60);
                 break;
 
-            case 'ms':
-            case 'millisecond':
-            case 'milliseconds':
-            case 'millis':
+            case 'ms':case 'millisecond':case 'milliseconds':case 'millis':
 
                 // 1785 minutes  * 6000(ms) = 107100000 ms
                 result = (mins * 60000);

@@ -62,8 +62,8 @@ function check(req,res){
 //    res.json(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
 
  
-var from = {nday:1,stime:"01:00"};
-var to = {nday:1,stime:"00:59"};
+var from = {nday:1,stime:"08:45"};
+var to = {nday:1,stime:"15:30"};
    //console.log(timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours"));
    timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours");
    return res.json();
