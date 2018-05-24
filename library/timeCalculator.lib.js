@@ -213,9 +213,15 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
         throw new Error("Not valid toTimeOBJ passed to diffDateTimeObj()");
     }
 
+    // check for null or empty
+    if (units == null || units) {
+        units = units.toLowerCase();
+    }
+
     console.log(fromTimeOBJ);
     console.log(toTimeOBJ);
     console.log(units);
+
 
 }
 var convertMinsToHrsMins = function (minutes) {
