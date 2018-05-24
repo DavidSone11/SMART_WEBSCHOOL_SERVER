@@ -224,7 +224,7 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     // console.log(fromTimeOBJ);
     // console.log(toTimeOBJ);
     // console.log(units);
-    var differ = toMins-fromMins;
+    var differ = (toMins-fromMins).toFixed(2);;
 
 
 }
