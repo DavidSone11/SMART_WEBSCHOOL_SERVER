@@ -19,4 +19,5 @@ https://github.com/axel-zarate/js-custom-select
 * time conversion formulas
 -------------------------
 https://www.inchcalculator.com/convert/day-to-minute/
+https://www.wikihow.com/Convert-Minutes-to-Hours
 

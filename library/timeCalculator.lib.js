@@ -274,16 +274,74 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
 
     fromResults = convertOBJtoTimeParts(fromTimeOBJ, "m1");
     toResults = convertOBJtoTimeParts(toTimeOBJ, "m1");
-    parseToTime(toResults);
-    function parseToTime(timepartsOBJ) {
 
+    // parseToTime(toResults, "min");
+    var r = {
+        day: 1,
+        'timePart-hh': 5,
+        'timePart-mm': 45
+    }
+    //parseToTime(r, "day");
+    console.log(parseToTime(r, "ms"));
+    function parseToTime(timepartsOBJ, units) {
+
+        var result = null;
         // formula to convert day and time to number
         // 1 Day = 1,440 Minutes
-          var mins = (timepartsOBJ["day"] * 1440) + (timepartsOBJ["timePart-hh"] * 60) + timepartsOBJ["timePart-mm"];
+        var mins = (timepartsOBJ["day"] * 1440) + (timepartsOBJ["timePart-hh"] * 60) + timepartsOBJ["timePart-mm"];
+        if (!units || (0 === units.length)) {
+            units = "";
+        }
 
+        switch (units) {
+            case 'min':
+            case 'mins':
+            case 'minutes':
+            case 'minute':
+                result = mins;
+                break;
 
-        return "1111";
+            case 'hr':
+            case 'hrs':
+            case 'hour':
+            case 'hours':
+                // 1785 minutes × 1 hour/60 minutes = 2.5 hours
+                result = mins * 1 / 60;
+                break;
 
+            case 'days':
+            case 'day':
+                // 1785 minutes / 1440 minutes = 2.5 day
+                result = {
+                    'dayInFraction': mins / 1440,
+                    'dayInNumber_trunc': Math.trunc(mins / 1440),
+                    'dayInNumber_floor': Math.floor(mins / 1440),
+                    'dayInNumber_round': Math.round(mins / 1440)
+                }
+
+                break;
+            case 'sec':
+            case 'secs':
+            case 'second':
+            case 'seconds':
+                // 1785 minutes × 1 hour * 60 sec = 107100 sec
+                result = (mins * 1 * 60);
+                break;
+
+            case 'ms':
+            case 'millisecond':
+            case 'milliseconds':
+            case 'millis':
+
+                // 1785 minutes  * 6000(ms) = 107100000 ms
+                result = (mins * 60000);
+                break;
+
+        }
+        return result;
+    }
+    function secondsToMinutes(ttime) {
+        return Math.floor(ttime / 60) + ':' + Math.floor(ttime % 60);
     }
 
 }
