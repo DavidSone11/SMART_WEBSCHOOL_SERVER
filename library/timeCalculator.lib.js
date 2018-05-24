@@ -92,26 +92,21 @@ var convertOBJtoTimeParts = function (dateTimeOBJ, methodORDER) {
 
                 results["timePart0"] = parseInt(dateTimeOBJ.stime.substr(0, 2));
                 results["timePart1"] = parseInt(dateTimeOBJ.stime.substr(3, 5));
-
+                results["day"] = dateTimeOBJ.nday;
                 break;
 
             case 'm2':
             case 'method2':
 
                 var hourEnd = timeString.indexOf(":");
-                results["timePart0"] = timeString.substr(0, hourEnd);
-                results["timePart1"] = timeString.substr((hourEnd+1), 4)
+                results["timePart0"] = timeString.substr(0,hourEnd);
+                results["timePart1"] = timeString.substr((hourEnd+1),4);
+                results["day"] = dateTimeOBJ.nday;
 
                 break;
 
         }
-
-
     }
-
-
-
-
     return results;
 }
 
@@ -274,7 +269,8 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     }
     units = units.toLowerCase();
 
-    convertOBJtoTimeParts(fromTimeOBJ, "m2");
+    console.log(convertOBJtoTimeParts(fromTimeOBJ, "m2"));
+    console.log(convertOBJtoTimeParts(toTimeOBJ, "m2"));
 
 
 
