@@ -59,8 +59,13 @@ router.get('/api/v1/userFileUpload/processUploads/:fname',require("./userFileUpl
 router.get('/api/v1/time',check);
 
 function check(req,res){
-   res.json(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
+//    res.json(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
 
+ 
+var from = {day:1,time:"01:00"};
+var to = {day:1,time:"00:59"};
+   console.log(timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hour"));
+   return res.json();
 
 }
 

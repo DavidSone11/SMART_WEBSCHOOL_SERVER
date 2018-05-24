@@ -62,7 +62,7 @@ var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
 
 
 
-var convertNumberToDateTimeObj = function(number, type) {
+var convertNumberToDateTimeObj = function (number, type) {
     if (type == null) {
         type = "";
     }
@@ -198,7 +198,24 @@ var addDateTimeObj = function (dateTimeObj, number, operation, type) {
 
 }
 
-var diffBetweenDateTimeOBJ = function () {
+var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
+
+    if (typeof fromTimeOBJ === "undefined" || fromTimeOBJ === 'null' || typeof fromTimeOBJ !== 'object' || fromTimeOBJ instanceof object) {
+        throw new Error("Not valid fromObj passed to diffDateTimeObj()");
+    }
+    if (typeof toTimeOBJ === "undefined" || toTimeOBJ === 'null' || typeof toTimeOBJ === 'object' || toTimeOBJ instanceof object) {
+        throw new Error("Not valid toTimeOBJ passed to diffDateTimeObj()");
+    }
+    if (fromTimeOBJ.day === null || fromTimeOBJ.time === null) {
+        throw new Error("Not valid fromTimeOBJ passed to diffDateTimeObj()");
+    }
+    if (toTimeOBJ.day === null || toTimeOBJ.time === null) {
+        throw new Error("Not valid toTimeOBJ passed to diffDateTimeObj()");
+    }
+
+    console.log(fromTimeOBJ);
+    console.log(toTimeOBJ);
+    console.log(units);
 
 }
 var convertMinsToHrsMins = function (minutes) {
