@@ -61,7 +61,8 @@ var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
 }
 
 
-var convertOBJtoTimeParts_and_Day = function(dateTimeOBJ){
+var convertOBJtoTimeParts = function (dateTimeOBJ, methodORDER) {
+    var results = {};
 
     if (typeof dateTimeOBJ !== 'object' || dateTimeOBJ == null || typeof dateTimeOBJ === "undefined") {
         throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
@@ -73,11 +74,45 @@ var convertOBJtoTimeParts_and_Day = function(dateTimeOBJ){
         throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
     }
 
-    var results = {};
+
+    // optional condition to check the string 
+    if(dateTimeOBJ.stime){
+        var timeString = "18:45";
+        //dateTimeOBJ.stime = dateTimeOBJ.stime.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        timeString = timeString.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [timeString];
+        var HH = parseInt(timeString.slice(1,2)[0]);
+        var MM = parseInt(timeString[3]);
+    }
+
+    if (dateTimeOBJ.stime) {
+        var timeString = "18:45";
+        switch (methodORDER) {
+            case 'm1':
+            case 'method1':
+
+                results["timePart0"] = parseInt(dateTimeOBJ.stime.substr(0, 2));
+                results["timePart1"] = parseInt(dateTimeOBJ.stime.substr(3, 5));
+
+                break;
+
+            case 'm2':
+            case 'method2':
+
+                var hourEnd = timeString.indexOf(":");
+                results["timePart0"] = timeString.substr(0, hourEnd);
+                results["timePart1"] = timeString.substr((hourEnd+1), 4)
+
+                break;
+
+        }
+
+
+    }
 
 
 
-    return ;
+
+    return results;
 }
 
 
@@ -220,7 +255,7 @@ var addDateTimeObj = function (dateTimeObj, number, operation, type) {
 
 var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
 
-    if (typeof fromTimeOBJ === "undefined" || fromTimeOBJ === 'null' || typeof fromTimeOBJ !== 'object' ) {
+    if (typeof fromTimeOBJ === "undefined" || fromTimeOBJ === 'null' || typeof fromTimeOBJ !== 'object') {
         throw new Error("Not valid fromObj passed to diffDateTimeObj()");
     }
     if (typeof toTimeOBJ === "undefined" || toTimeOBJ === 'null' || typeof toTimeOBJ !== 'object') {
@@ -239,13 +274,8 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     }
     units = units.toLowerCase();
 
-    //var fromMins = convertDateTimeObjToNumber(fromTimeOBJ, units);
-    var mins = (dateTimeObj.nday * 1440) + (tParts[0] * 60) + tParts[1];
-    //var toMins = convertDateTimeObjToNumber(toTimeOBJ, units);
-    // console.log(fromTimeOBJ);
-    // console.log(toTimeOBJ);
-    // console.log(units);
-    var differ = (toMins-fromMins).toFixed(2);
+    convertOBJtoTimeParts(fromTimeOBJ, "m2");
+
 
 
 }
@@ -311,3 +341,4 @@ exports.addDateTimeObj = addDateTimeObj;
 exports.diffBetweenDateTimeOBJ = diffBetweenDateTimeOBJ;
 exports.toHourMinutes = toHourMinutes;
 exports.minutesToHHMM = minutesToHHMM;
+exports.convertOBJtoTimeParts = convertOBJtoTimeParts;

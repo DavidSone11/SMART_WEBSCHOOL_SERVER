@@ -64,6 +64,7 @@ function check(req,res){
  
 var from = {nday:1,stime:"01:00"};
 var to = {nday:1,stime:"00:59"};
+   //console.log(timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours"));
    console.log(timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours"));
    return res.json();
 
