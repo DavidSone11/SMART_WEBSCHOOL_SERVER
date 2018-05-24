@@ -76,11 +76,11 @@ var convertOBJtoTimeParts = function (dateTimeOBJ, methodORDER) {
 
 
     // optional condition to check the string 
-    if(dateTimeOBJ.stime){
+    if (dateTimeOBJ.stime) {
         var timeString = "18:45";
         //dateTimeOBJ.stime = dateTimeOBJ.stime.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
         timeString = timeString.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [timeString];
-        var HH = parseInt(timeString.slice(1,2)[0]);
+        var HH = parseInt(timeString.slice(1, 2)[0]);
         var MM = parseInt(timeString[3]);
     }
 
@@ -90,8 +90,8 @@ var convertOBJtoTimeParts = function (dateTimeOBJ, methodORDER) {
             case 'm1':
             case 'method1':
 
-                results["timePart0"] = parseInt(dateTimeOBJ.stime.substr(0, 2));
-                results["timePart1"] = parseInt(dateTimeOBJ.stime.substr(3, 5));
+                results["timePart-hh"] = parseInt(dateTimeOBJ.stime.substr(0, 2));
+                results["timePart-mm"] = parseInt(dateTimeOBJ.stime.substr(3, 5));
                 results["day"] = dateTimeOBJ.nday;
                 break;
 
@@ -99,8 +99,8 @@ var convertOBJtoTimeParts = function (dateTimeOBJ, methodORDER) {
             case 'method2':
 
                 var hourEnd = timeString.indexOf(":");
-                results["timePart0"] = timeString.substr(0,hourEnd);
-                results["timePart1"] = timeString.substr((hourEnd+1),4);
+                results["timePart-hh"] = timeString.substr(0, hourEnd);
+                results["timePart-mm"] = timeString.substr((hourEnd + 1), 4);
                 results["day"] = dateTimeOBJ.nday;
 
                 break;
@@ -269,10 +269,22 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     }
     units = units.toLowerCase();
 
-    console.log(convertOBJtoTimeParts(fromTimeOBJ, "m2"));
-    console.log(convertOBJtoTimeParts(toTimeOBJ, "m2"));
+    var fromResults = {};
+    var toResults = {};
+
+    fromResults = convertOBJtoTimeParts(fromTimeOBJ, "m1");
+    toResults = convertOBJtoTimeParts(toTimeOBJ, "m1");
+    parseToTime(toResults);
+    function parseToTime(timepartsOBJ) {
+
+        // formula to convert day and time to number
+        // 1 Day = 1,440 Minutes
+          var mins = (timepartsOBJ["day"] * 1440) + (timepartsOBJ["timePart-hh"] * 60) + timepartsOBJ["timePart-mm"];
 
 
+        return "1111";
+
+    }
 
 }
 var convertMinsToHrsMins = function (minutes) {

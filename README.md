@@ -15,3 +15,8 @@ node --max-old-space-size=100000 app.js
 https://github.com/cgross/angular-prompt
 https://craftpip.github.io/angular-confirm/
 https://github.com/axel-zarate/js-custom-select
+
+* time conversion formulas
+-------------------------
+https://www.inchcalculator.com/convert/day-to-minute/
+
