@@ -4,8 +4,8 @@ var CustomError = require('../exception/custom-error');
 
 /**
  *  A function to convert DateTime object to Number
- * @param {object} dateTimeObj - {{day:1,time:'5:05'}}.
- * @param {string} conversionUnits - mins,hrs,days
+ * @param {object} [dateTimeObj={day:1,time:'5:05'}]  
+ * @param {string} [conversionUnits='mins']   - mins,hrs,days
  */
 
 var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
@@ -60,16 +60,145 @@ var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
 
 }
 
-var convertNumberToDateTimeObj = function (numberInMinutes, sType) {
 
-    return "test"
+
+var convertNumberToDateTimeObj = function(number, type) {
+    if (type == null) {
+        type = "";
+    }
+    type = type.toLowerCase();
+
+    if (number == null) {
+        throw new Error("Number not sent to convertNumberToDateTimeObj()");
+    }
+    var day = -1;
+    var hrs = -1;
+    var mins = -1;
+    switch (type) {
+        case 'mins': case 'min': case 'minutes': case 'minute':
+            day = Math.floor(number / 1440);
+            number = number % 1440;
+            hrs = Math.floor(number / 60);
+            number = number % 60;
+            mins = Math.floor(number);
+            if (mins > 60) {
+                throw new Error("Number not in correct type given");
+            }
+            break;
+        case 'hrs': case 'hr': case 'hours': case 'hour':
+            day = Math.floor(number / 1440);
+            number = number % 1440;
+            hrs = Math.floor(number / 60);
+            if (hrs > 24) {
+                throw new Error("Number not in correct type given");
+            }
+            break;
+        case 'days': case 'day':
+            day = Math.floor(number / 1440);
+            if (day > 24) {
+                throw new Error("Number not in correct type given");
+            }
+            break;
+        default:
+            day = Math.floor(number / 1440);
+            number = number % 1440;
+            hrs = Math.floor(number / 60);
+            number = number % 60;
+            mins = Math.floor(number);
+            if (mins > 60) {
+                throw new Error("Number not in correct type given");
+            }
+            break;
+    }
+    var result = {};
+    if (day != -1) {
+        result.days = day;
+        result.day = day % 7;
+    }
+    if (hrs != -1 && mins == -1) {
+        result.time = (hrs < 10) ? '0' : '' + hrs + ':00';
+    }
+    else if (hrs != -1 && mins != -1) {
+        result.time = "";
+        result.time += ((hrs < 10) ? '0' : '') + hrs.toString();
+        result.time += ':' + ((mins < 10) ? '0' : '') + mins.toString();
+    }
+    return result;
 }
 
-var addDateTimeObj = function () {
+
+var addDateTimeObj = function (dateTimeObj, number, operation, type) {
+    if (type == null) {
+        type = "";
+    }
+    if (operation == null) {
+        operation = "+";
+    }
+    type = type.toLowerCase();
+    operation = operation.toLowerCase();
+
+    if (isNaN(number)) {
+        throw new Error("Number is not proper in addDateTimeObj()");
+    }
+    var timeNo = null;
+    var resultNo = null;
+    var resultObj = null;
+    timeNo = convertDateTimeObjToNumber(dateTimeObj, "min");
+    switch (operation) {
+        case '+': case 'plus': case 'add': case 'addition':
+            resultNo = timeNo + number;
+            // switch (type) {
+            //     case 'mins': case 'min': case 'minutes': case 'minute':
+            //         resultNo = (resultNo % 10080);
+            //         break;
+            //     case 'hrs': case 'hr': case 'hours': case 'hour':
+            //         resultNo = (resultNo % 168);
+            //         break;
+            //     case 'days': case 'day':
+            //         resultNo = (resultNo % 7);
+            //         break;
+            //     default:
+            //         resultNo = (resultNo % 10080);
+            //         break;
+            // }
+            break;
+        case '-': case 'minus': case 'sub': case 'subtract': case 'subtraction':
+            resultNo = timeNo - number;
+            if (resultNo < 0) {
+                switch (type) {
+                    case 'mins': case 'min': case 'minutes': case 'minute':
+                        var q = Math.floor(Math.abs(resultNo) / 10080);
+                        q += 1;
+                        resultNo = ((10080 * q) + resultNo);
+                        break;
+                    case 'hrs': case 'hr': case 'hours': case 'hour':
+                        var q = Math.floor(Math.abs(resultNo) / 10080);
+                        q += 1;
+                        resultNo = ((168 * q) + resultNo);
+                        break;
+                    case 'days': case 'day':
+                        var q = Math.floor(Math.abs(resultNo) / 10080);
+                        q += 1;
+                        resultNo = ((7 * q) + resultNo);
+                        break;
+                    default:
+                        var q = Math.floor(Math.abs(resultNo) / 10080);
+                        q += 1;
+                        resultNo = ((10080 * q) + resultNo);
+                        break;
+                }
+            }
+            break;
+        default:
+            resultNo = timeNo + number;
+            break;
+    }
+    resultObj = convertNumberToDateTimeObj(resultNo, "min");
+    return resultObj;
 
 }
 
-var diffDateTimeObj = function () {
+var diffBetweenDateTimeOBJ = function () {
 
 }
 var convertMinsToHrsMins = function (minutes) {
@@ -110,12 +239,27 @@ var toHourMinutes = function (min, sType) {
     return r;
 }
 
+var minutesToHHMM = function (mins, isTwentyFour) {
+    var h = Math.floor(mins / 60);
+    var m = mins % 60;
+    m = m < 10 ? '0' + m : m;
 
+    if (isTwentyFour) {
+        h = h < 10 ? '0' + h : h;
+        return h + ':' + m;
+    } else {
+        var a = 'am';
+        if (h >= 12) a = 'pm';
+        if (h > 12) h = h - 12;
+        return h + ':' + m + a;
+    }
+}
 
 
 exports.convertDateTimeObjToNumber = convertDateTimeObjToNumber;
 exports.convertNumberToDateTimeObj = convertNumberToDateTimeObj;
 exports.convertMinsToHrsMins = convertMinsToHrsMins;
 exports.addDateTimeObj = addDateTimeObj;
-exports.diffDateTimeObj = diffDateTimeObj;
+exports.diffBetweenDateTimeOBJ = diffBetweenDateTimeOBJ;
 exports.toHourMinutes = toHourMinutes;
+exports.minutesToHHMM = minutesToHHMM;

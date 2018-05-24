@@ -6,6 +6,8 @@ var userPlan = require("./userPlans.route");
 var multer  = require("multer");
 var upload = multer({ dest: './uploads' })
 
+var timecalOBJ = require('../library/timeCalculator.lib');
+var timecalmomentOBJ = require('../library/timeCalculator.moment.lib');
 
 
 
@@ -54,5 +56,23 @@ router.get('/api/v1/userFileUpload/getAllUserUpload', require("./userFileUpload.
 router.post('/api/v1/userFileUpload/saveUserFileUpload',require("./userFileUpload.route").saveUserFileUpload);
 router.get('/api/v1/userFileUpload/processUploads/:fname',require("./userFileUpload.route").processUserUpload);
 
+router.get('/api/v1/time',check);
+
+function check(req,res){
+   res.json(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
+
+
+}
+
+//console.log(timecalOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:45"},"hour"));
+//console.log(timecalOBJ.convertNumberToDateTimeObj(1748,"+"));
+//console.log(timecalOBJ.convertMinsToHrsMins(1748));
+//console.log(timecalOBJ.toHourMinutes(65,"m2"));
+//console.log(timecalOBJ.minutesToHHMM(1748,false));
+
+// console.log(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
+
+
+//console.log(timecalmomentOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:30"}));
 
 module.exports = router;
