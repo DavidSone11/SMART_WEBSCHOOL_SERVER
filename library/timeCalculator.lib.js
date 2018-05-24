@@ -200,27 +200,31 @@ var addDateTimeObj = function (dateTimeObj, number, operation, type) {
 
 var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
 
-    if (typeof fromTimeOBJ === "undefined" || fromTimeOBJ === 'null' || typeof fromTimeOBJ !== 'object' || fromTimeOBJ instanceof object) {
+    if (typeof fromTimeOBJ === "undefined" || fromTimeOBJ === 'null' || typeof fromTimeOBJ !== 'object' ) {
         throw new Error("Not valid fromObj passed to diffDateTimeObj()");
     }
-    if (typeof toTimeOBJ === "undefined" || toTimeOBJ === 'null' || typeof toTimeOBJ === 'object' || toTimeOBJ instanceof object) {
+    if (typeof toTimeOBJ === "undefined" || toTimeOBJ === 'null' || typeof toTimeOBJ !== 'object') {
         throw new Error("Not valid toTimeOBJ passed to diffDateTimeObj()");
     }
-    if (fromTimeOBJ.day === null || fromTimeOBJ.time === null) {
+    if (fromTimeOBJ.nday === null || fromTimeOBJ.stime === null) {
         throw new Error("Not valid fromTimeOBJ passed to diffDateTimeObj()");
     }
-    if (toTimeOBJ.day === null || toTimeOBJ.time === null) {
+    if (toTimeOBJ.nday === null || toTimeOBJ.stime === null) {
         throw new Error("Not valid toTimeOBJ passed to diffDateTimeObj()");
     }
 
     // check for null or empty
-    if (units == null || units) {
-        units = units.toLowerCase();
+    if ((units == null) || (!units || 0 === units.length)) {
+        units = "";
     }
+    units = units.toLowerCase();
 
-    console.log(fromTimeOBJ);
-    console.log(toTimeOBJ);
-    console.log(units);
+    var fromMins = convertDateTimeObjToNumber(fromTimeOBJ, units);
+    var toMins = convertDateTimeObjToNumber(toTimeOBJ, units);
+    // console.log(fromTimeOBJ);
+    // console.log(toTimeOBJ);
+    // console.log(units);
+    var differ = toMins-fromMins;
 
 
 }
