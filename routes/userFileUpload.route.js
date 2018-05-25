@@ -104,6 +104,13 @@ function processToTrainStations(res) {
         // rows = rows.split("\n");
         // console.log(rows);
 
+        var trainNo = 0;
+        var stopNo = 0;
+        var dayofJourney = 0;
+        var distance = 0;
+        var arrivalTimeMinutes = 0;
+        var departureTimeMinutes = 0;
+
         data += '\n';
         var re = /\r\n|\n\r|\n|\r/g;
         var rows = data.replace(re, "\n").split("\n");
@@ -111,20 +118,24 @@ function processToTrainStations(res) {
 
         for (var i = 1; i < rows.length; i++) {
 
-                var rowdata = rows[i].split(",");
-                var trainNo = parseInt(rowdata[0]);
-                var stopNo = parseInt(rowdata[1]);
-                var code = rowdata[2];
-                var dayofJourney = parseInt(rowdata[3]);
-                var arrivalDay = dayofJourney - 1;
-                var arrivalTime = rowdata[4];
-                var departureTime = rowdata[5];
-                var departureDay = arrivalDay;
-                var distance = parseInt(rowdata[6]);
-                var locotype = rowdata[7];
 
-            var arrivalTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({nday:arrivalDay,stime:arrivalTime});
-            var departureTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({nday:departureDay,stime:departureTime});
+
+            var rowdata = rows[i].split(",");
+
+            trainNo = rowdata[0];
+            stopNo = rowdata[1];
+
+            var code = rowdata[2];
+            dayofJourney = rowdata[3];
+            var arrivalDay = dayofJourney - 1;
+            var arrivalTime = rowdata[4];
+            var departureTime = rowdata[5];
+            var departureDay = arrivalDay;
+            distance = rowdata[6];
+            var locotype = rowdata[7];
+
+            arrivalTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: arrivalDay, stime: arrivalTime });
+            departureTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: departureDay, stime: departureTime });
             pushToTrainArrayOBJ(trainNo, stopNo, code, dayofJourney, arrivalTime, arrivalTimeMinutes, departureTime, departureTimeMinutes, distance, locotype);
 
 
