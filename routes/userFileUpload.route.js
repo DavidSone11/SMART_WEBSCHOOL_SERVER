@@ -116,7 +116,7 @@ function processToTrainStations(res) {
         var rows = data.replace(re, "\n").split("\n");
 
 
-        for (var i = 1; i < rows.length; i++) {
+        for (var i = 1; i < rows.length-1; i++) {
 
 
 
