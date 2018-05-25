@@ -108,8 +108,9 @@ function processTrainsToDB(res) {
         var trainName = null;
         var fromStation = null;
         var toStation = null;
-        var runningDys = null;
-        var departureTimeMinutes = 0;
+        var trainType = null;
+
+
 
         data += '\n';
         var re = /\r\n|\n\r|\n|\r/g;
@@ -121,35 +122,39 @@ function processTrainsToDB(res) {
 
             fromStation = rowdata[2];
             toStation = rowdata[3];
-            var runningDays = [];
-            for (var j = 4; j < rowdata.length; j++) {
-                if (rowdata[j] != "") {
-                    var days = rowdata[j];
-                    runningDays.push(days);
-                }
+            trainType = rowdata[11];
 
+
+            var runningDays = [];
+            var nCount = 0;
+            for (var j = 0; j < 7; j++) {
+                var runningDay = rowdata[4 + j];
+                if (runningDay != "") {
+                    runningDays.push(j);
+
+                }
 
             }
 
 
             //arrivalTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: arrivalDay, stime: arrivalTime });
             //departureTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: departureDay, stime: departureTime });
-            pushToTrainArray(trainNo, trainName, fromStation, toStation,runningDays,"","");
+            pushToTrainArray(trainNo, trainName, fromStation, toStation, runningDays, trainType, "");
 
 
         }
         /// save to DB
-        trainModel.insertMany(trainsArray, function (err, results) {
-            if (err) console.log(err);
-            console.log("saved Successfully");
-        })
-
-
-    } catch (e) {
-        console.log(e)
+        try {
+            trainModel.insertMany(trainsArray, function (err, results) {
+                if (err) console.log(err);
+                console.log("saved Successfully");
+            });
+        } catch (exp) {
+            throw new Error("Error Uploading data in DB : processTrainsToDB()" + exp);
+        }
+    } catch (exp) {
+        throw new Error("Error in processTrainsToDB()" + exp);
     }
-
-
 
 }
 
