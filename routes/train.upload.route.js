@@ -8,7 +8,7 @@ var fs = require('fs');
 
 var timeCALCULATOR = require("../library/timeCalculator.lib");
 
-var trainListArray = [];
+var trainsArray = [];
 
 
 
@@ -134,8 +134,8 @@ function processTrainsToDB(res) {
 
 
         }
-        /// write to DB
-        trainModel.insertMany(trainListArray, function (err, results) {
+        /// save to DB
+        trainModel.insertMany(trainsArray, function (err, results) {
             if (err) console.log(err);
             console.log("saved Successfully");
         })

@@ -52,9 +52,14 @@ router.post('/api/v1/userUpload/saveUpload',upload.single('file'), require("./us
 
 // Route for UserFile Upload
 
-router.get('/api/v1/userFileUpload/getAllUserUpload', require("./trainStation.upload.route").getlltrainStationUpload);
-router.post('/api/v1/userFileUpload/saveUserFileUpload',require("./trainStation.upload.route").savetrainStationUpload);
-router.get('/api/v1/userFileUpload/processUploads/:fname',require("./trainStation.upload.route").processtrainStationUpload);
+router.get('/api/v1/trainStationUpload/getTrainStationUpload', require("./trainStation.upload.route").getlltrainStationUpload);
+router.post('/api/v1/trainStationUpload/saveTrainStationUpload',require("./trainStation.upload.route").savetrainStationUpload);
+router.get('/api/v1/trainStationUpload/processTrainStationUpload/:fname',require("./trainStation.upload.route").processtrainStationUpload);
+
+
+router.get('/api/v1/trainUpload/getTrainUpload', require("./train.upload.route").getTrainUpload);
+router.post('/api/v1/trainUpload/saveTrainpload',require("./train.upload.route").saveTrainUpload);
+router.get('/api/v1/trainUpload/processTrainUpload/:fname',require("./train.upload.route").processTrainUpload);
 
 // router.get('/api/v1/time',check);
 
