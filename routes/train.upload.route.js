@@ -32,7 +32,7 @@ module.exports = {
 
     processTrainUpload: function (req, res) {
 
-        var query = userFileUploadModel.find({ fileName: req.params.fname });
+        var query = userFileUploadModel.find({fileName: req.params.fname });
         query.then(function (res) {
             processTrainsToDB(res);
 

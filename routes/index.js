@@ -58,7 +58,7 @@ router.get('/api/v1/trainStationUpload/processTrainStationUpload/:fname',require
 
 
 router.get('/api/v1/trainUpload/getTrainUpload', require("./train.upload.route").getTrainUpload);
-router.post('/api/v1/trainUpload/saveTrainpload',require("./train.upload.route").saveTrainUpload);
+router.post('/api/v1/trainUpload/saveTrainUpload',require("./train.upload.route").saveTrainUpload);
 router.get('/api/v1/trainUpload/processTrainUpload/:fname',require("./train.upload.route").processTrainUpload);
 
 // router.get('/api/v1/time',check);
