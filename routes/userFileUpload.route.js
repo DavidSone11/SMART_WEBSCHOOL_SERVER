@@ -6,7 +6,7 @@ var Promise = require("bluebird");
 require('mongoose-query-paginate');
 var fs = require('fs');
 var csvWrite = require("../library/csv.lib");
-var timeCAL = require("../library/timeCalculator.lib");
+var timeCALCULATOR = require("../library/timeCalculator.lib");
 
 var trainListArray = [];
 
@@ -34,7 +34,7 @@ var userFileUploadOBJ = {
 
         var query = userFileUploadModel.find({ fileName: req.params.fname });
         query.then(function (res) {
-            processToTrain(res);
+            processToTrainStations(res);
 
         }, function (err) {
 
@@ -91,7 +91,7 @@ function extension(f) {
     return y;
 }
 
-function processToTrain(res) {
+function processToTrainStations(res) {
 
 
     try {
@@ -110,27 +110,31 @@ function processToTrain(res) {
 
 
         for (var i = 1; i < rows.length; i++) {
-            var rowdata = rows[i].split(",");
-            var trainNo = rowdata[0];
-             var stopNo = rowdata[1];
-            var code = rowdata[2];
-            var dayofJourney = rowdata[3];
-            var arrivalTime = rowdata[4];
-            var departureTime = rowdata[5];
-            var distance = rowdata[6];
-            var locotype = rowdata[7];
 
-            var arrivalTimeMinutes = timeCAL.convertDateTimeObjToNumber({ day: arrivalDay, time: arrivalTime });
-            pushToTrainArrayOBJ(trainNo, stopNo, code, dayofJourney, arrivalTime, departureTime, distance, locotype);
-           
-    
+                var rowdata = rows[i].split(",");
+                var trainNo = parseInt(rowdata[0]);
+                var stopNo = parseInt(rowdata[1]);
+                var code = rowdata[2];
+                var dayofJourney = parseInt(rowdata[3]);
+                var arrivalDay = dayofJourney - 1;
+                var arrivalTime = rowdata[4];
+                var departureTime = rowdata[5];
+                var departureDay = arrivalDay;
+                var distance = parseInt(rowdata[6]);
+                var locotype = rowdata[7];
+
+            var arrivalTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({nday:arrivalDay,stime:arrivalTime});
+            var departureTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({nday:departureDay,stime:departureTime});
+            pushToTrainArrayOBJ(trainNo, stopNo, code, dayofJourney, arrivalTime, arrivalTimeMinutes, departureTime, departureTimeMinutes, distance, locotype);
+
+
         }
-         /// write to DB
-         trainstationModel.insertMany(trainListArray, function (err, results) {
-            if (err) console.log (err);
+        /// write to DB
+        trainstationModel.insertMany(trainListArray, function (err, results) {
+            if (err) console.log(err);
             console.log("saved Successfully");
         })
-       
+
 
     } catch (e) {
         console.log(e)
@@ -140,14 +144,16 @@ function processToTrain(res) {
 
 }
 
-function pushToTrainArrayOBJ(trainNo, stopNo, code, dayOfJourney, arrivalTime, departureTime, distance, locoType) {
+function pushToTrainArrayOBJ(trainNo, stopNo, code, dayOfJourney, arrivalTime, arrivalMinutes, departureTime, departureMinutes, distance, locoType) {
     trainListArray.push({
         trainNo: trainNo,
         stopNo: stopNo,
         stationCode: code,
         dayOfJourney: dayOfJourney,
         arrivalTime: arrivalTime,
+        arrivalMinutes: arrivalMinutes,
         departureTime: departureTime,
+        departureMinutes: departureMinutes,
         distance: distance,
         locoType: locoType
     });

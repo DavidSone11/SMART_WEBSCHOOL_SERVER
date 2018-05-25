@@ -13,12 +13,15 @@ var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
         throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
     }
     if (dateTimeObj.nday === null || typeof dateTimeObj.nday === "undefined") {
-        throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
+        throw new Error("Not valid day passed to convertDateTimeObj() : "+dateTimeObj.nday);
     }
-    if (dateTimeObj.stime === null || typeof dateTimeObj.stime === "undefined") {
-        throw new Error("Not valid dateTimeObject passed to convertDateTimeObj()");
-    }
+    // if (dateTimeObj.stime === null || typeof dateTimeObj.stime === "undefined") {
+    //     throw new Error("Not valid time passed to convertDateTimeObj() : "+dateTimeObj.stime);
+    // }
 
+    if (dateTimeObj.stime === null) {
+        throw new Error("Not valid time passed to convertDateTimeObj() : "+dateTimeObj.stime);
+    }
 
 
     if (typeof dateTimeObj.stime === 'string' || dateTimeObj.stime instanceof String) {
@@ -26,11 +29,12 @@ var convertDateTimeObjToNumber = function (dateTimeObj, conversionUnits) {
         dateTimeObj.stime = dateTimeObj.stime.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [dateTimeObj.stime];
         if (dateTimeObj.stime.length > 0) {
             var tParts = dateTimeObj.stime[0].split(":");
-            tParts[0] = parseInt(tParts[0]);
-            tParts[1] = parseInt(tParts[1]);
+            tParts[0] = parseInt(Math.abs(tParts[0]));
+            tParts[1] = parseInt(Math.abs(tParts[1]));
+            // Math.abs() is used to convert negative to positive
 
             if ((tParts[0] > 23 || tParts[0] < 0) || (tParts[1] > 59 || tParts[1] < 0)) {
-                throw new Error("Not valid dateTimeObj.time passed to convertDateTimeObj()");
+                throw new Error("Not valid dateTimeObj.time passed to convertDateTimeObj()"+tParts[0]+":"+tParts[1]);
             }
             if (typeof conversionUnits === "undefined") {
                 conversionUnits = "";
