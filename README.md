@@ -21,3 +21,5 @@ https://github.com/axel-zarate/js-custom-select
 https://www.inchcalculator.com/convert/day-to-minute/
 https://www.wikihow.com/Convert-Minutes-to-Hours
 
+
+http://eriktufvesson.github.io/ngbootbox/

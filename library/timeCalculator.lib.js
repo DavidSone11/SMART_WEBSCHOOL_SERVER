@@ -278,8 +278,14 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     var from = parseToTime(fromResults, "min");
     var to = parseToTime(toResults, "min");
     var diff = to - from;
+    var totalResult = null;
+    if (diff < 0) {
 
-   
+    } else {
+        totalResult = convertNumberToDateTime(diff, "units");
+    }
+
+
     function parseToTime(timepartsOBJ, units) {
 
         var result = null;
@@ -291,14 +297,14 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
         }
 
         switch (units) {
-            case 'min':case 'mins':case 'minutes':case 'minute':
+            case 'min': case 'mins': case 'minutes': case 'minute':
                 result = mins;
                 break;
-            case 'hr':case 'hrs':case 'hour':case 'hours':
+            case 'hr': case 'hrs': case 'hour': case 'hours':
                 // 1785 minutes × 1 hour/60 minutes = 2.5 hours
                 result = mins * 1 / 60;
                 break;
-            case 'days':case 'day':
+            case 'days': case 'day':
                 // 1785 minutes / 1440 minutes = 2.5 day
                 result = {
                     'dayInFraction': mins / 1440,
@@ -307,13 +313,11 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
                     'dayInNumber_round': Math.round(mins / 1440)
                 }
                 break;
-            case 'sec':case 'secs':case 'second':case 'seconds':
+            case 'sec': case 'secs': case 'second': case 'seconds':
                 // 1785 minutes × 1 hour * 60 sec = 107100 sec
                 result = (mins * 1 * 60);
                 break;
-
-            case 'ms':case 'millisecond':case 'milliseconds':case 'millis':
-
+            case 'ms': case 'millisecond': case 'milliseconds': case 'millis':
                 // 1785 minutes  * 6000(ms) = 107100000 ms
                 result = (mins * 60000);
                 break;
@@ -324,6 +328,67 @@ var diffBetweenDateTimeOBJ = function (fromTimeOBJ, toTimeOBJ, units) {
     function secondsToMinutes(ttime) {
         return Math.floor(ttime / 60) + ':' + Math.floor(ttime % 60);
     }
+
+
+
+    return totalResult;
+
+}
+
+var convertNumberToDateTime = function (number, units) {
+
+    var day = -1;
+    var hrs = -1;
+    var mins = -1;
+    if (isNaN(number) || number == null) {
+        throw new Error("Number is not in format!!!!!");
+    }
+    units = units.toLowerCase();
+    var result = {};
+
+    switch (units) {
+        default:
+            day = Math.floor(number / 1440);
+            number = number % 1440;
+            hrs = Math.floor(number / 60);
+            number = number % 60;
+            mins = Math.floor(number);
+            break;
+
+        case 'hrs': case 'hr': case 'hours': case 'hour':
+            day = Math.floor(number / 1440);
+            number = number % 1440;
+            hrs = Math.floor(number / 60);
+            if (hrs > 24) {
+                throw new Error("Number not in correct type given");
+            }
+            break;
+
+        case 'days': case 'day':
+            day = Math.floor(number / 1440);
+            if (day > 24) {
+                throw new Error("Number not in correct type given");
+            }
+            break;
+
+    }
+    if (day != -1) {
+        result.day = day;
+        result.days = (day % 7);
+    }
+
+    if (hrs != -1 && mins == -1) {
+        result.time = ((hrs < 10) ? '0' : '').concat(hrs + ':00');
+    }
+    
+    else if (hrs != -1 && mins != -1) {
+        result.time = "";
+        result.time += ((hrs < 10) ? '0' : '') + hrs.toString();
+        result.time += ':' + ((mins < 10) ? '0' : '') + mins.toString();
+    }
+
+
+    return result;
 
 }
 var convertMinsToHrsMins = function (minutes) {

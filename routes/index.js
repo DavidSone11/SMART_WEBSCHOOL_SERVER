@@ -56,19 +56,18 @@ router.get('/api/v1/userFileUpload/getAllUserUpload', require("./userFileUpload.
 router.post('/api/v1/userFileUpload/saveUserFileUpload',require("./userFileUpload.route").saveUserFileUpload);
 router.get('/api/v1/userFileUpload/processUploads/:fname',require("./userFileUpload.route").processUserUpload);
 
-router.get('/api/v1/time',check);
+// router.get('/api/v1/time',check);
 
-function check(req,res){
-//    res.json(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
+// function check(req,res){
+// //    res.json(timecalOBJ.addDateTimeObj({nday:1,stime:"23:45"},5,"-","mins"));
 
  
-var from = {nday:1,stime:"08:45"};
-var to = {nday:1,stime:"15:30"};
-   //console.log(timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours"));
-   timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours");
-   return res.json();
+// var from = {nday:1,stime:"08:45"};
+// var to = {nday:1,stime:"15:30"};
+// console.log(timecalOBJ.diffBetweenDateTimeOBJ(from,to,"hours"));
+//    return res.json("Welcome :");
 
-}
+// }
 
 //console.log(timecalOBJ.convertDateTimeObjToNumber({nday:1,stime:"5:45"},"hour"));
 //console.log(timecalOBJ.convertNumberToDateTimeObj(1748,"+"));
