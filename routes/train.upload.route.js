@@ -32,7 +32,7 @@ module.exports = {
 
     processTrainUpload: function (req, res) {
 
-        var query = userFileUploadModel.find({fileName: req.params.fname });
+        var query = userFileUploadModel.find({ fileName: req.params.fname });
         query.then(function (res) {
             processTrainsToDB(res);
 
@@ -105,32 +105,36 @@ function processTrainsToDB(res) {
         // console.log(rows);
 
         var trainNo = 0;
-        var stopNo = 0;
-        var dayofJourney = 0;
-        var distance = 0;
-        var arrivalTimeMinutes = 0;
+        var trainName = null;
+        var fromStation = null;
+        var toStation = null;
+        var runningDys = null;
         var departureTimeMinutes = 0;
 
         data += '\n';
         var re = /\r\n|\n\r|\n|\r/g;
         var rows = data.replace(re, "\n").split("\n");
-        for (var i = 1; i < rows.length-1; i++) {
+        for (var i = 1; i < rows.length - 1; i++) {
             var rowdata = rows[i].split(",");
             trainNo = rowdata[0];
-            stopNo = rowdata[1];
+            trainName = rowdata[1];
 
-            var code = rowdata[2];
-            dayofJourney = rowdata[3];
-            var arrivalDay = dayofJourney - 1;
-            var arrivalTime = rowdata[4];
-            var departureTime = rowdata[5];
-            var departureDay = arrivalDay;
-            distance = rowdata[6];
-            var locotype = rowdata[7];
+            fromStation = rowdata[2];
+            toStation = rowdata[3];
+            var runningDays = [];
+            for (var j = 4; j < rowdata.length; j++) {
+                if (rowdata[j] != "") {
+                    var days = rowdata[j];
+                    runningDays.push(days);
+                }
 
-            arrivalTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: arrivalDay, stime: arrivalTime });
-            departureTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: departureDay, stime: departureTime });
-            pushToTrainArrayOBJ(trainNo, stopNo, code, dayofJourney, arrivalTime, arrivalTimeMinutes, departureTime, departureTimeMinutes, distance, locotype);
+
+            }
+
+
+            //arrivalTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: arrivalDay, stime: arrivalTime });
+            //departureTimeMinutes = timeCALCULATOR.convertDateTimeObjToNumber({ nday: departureDay, stime: departureTime });
+            pushToTrainArray(trainNo, trainName, fromStation, toStation,runningDays,"","");
 
 
         }
@@ -149,18 +153,16 @@ function processTrainsToDB(res) {
 
 }
 
-function pushToTrainArrayOBJ(trainNo, stopNo, code, dayOfJourney, arrivalTime, arrivalMinutes, departureTime, departureMinutes, distance, locoType) {
-    trainListArray.push({
+function pushToTrainArray(trainNo, trainName, fromStation, toStation, runningDays, trainType, locoType) {
+    trainsArray.push({
         trainNo: trainNo,
-        stopNo: stopNo,
-        stationCode: code,
-        dayOfJourney: dayOfJourney,
-        arrivalTime: arrivalTime,
-        arrivalMinutes: arrivalMinutes,
-        departureTime: departureTime,
-        departureMinutes: departureMinutes,
-        distance: distance,
+        trainName: trainName,
+        fromStation: fromStation,
+        toStation: toStation,
+        runningDays: runningDays,
+        trainType: trainType,
         locoType: locoType
+
     });
 
 
