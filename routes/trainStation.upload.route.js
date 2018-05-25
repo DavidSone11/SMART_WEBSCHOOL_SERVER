@@ -12,8 +12,8 @@ var trainListArray = [];
 
 
 
-var userFileUploadOBJ = {
-    getllUserUpload: function (req, res) {
+module.exports = {
+    getlltrainStationUpload: function (req, res) {
         var options = {
             perPage: parseInt(req.query.limit) || 10,
             page: parseInt(req.query.page) || 1,
@@ -30,7 +30,7 @@ var userFileUploadOBJ = {
 
 
 
-    processUserUpload: function (req, res) {
+    processtrainStationUpload: function (req, res) {
 
         var query = userFileUploadModel.find({ fileName: req.params.fname });
         query.then(function (res) {
@@ -43,7 +43,7 @@ var userFileUploadOBJ = {
         return res.json("ok");
     },
 
-    saveUserFileUpload: function (req, res) {
+    savetrainStationUpload: function (req, res) {
         if (!req.files)
             return res.status(400).json({
                 "status": false,
@@ -114,14 +114,8 @@ function processToTrainStations(res) {
         data += '\n';
         var re = /\r\n|\n\r|\n|\r/g;
         var rows = data.replace(re, "\n").split("\n");
-
-
         for (var i = 1; i < rows.length-1; i++) {
-
-
-
             var rowdata = rows[i].split(",");
-
             trainNo = rowdata[0];
             stopNo = rowdata[1];
 
@@ -173,4 +167,4 @@ function pushToTrainArrayOBJ(trainNo, stopNo, code, dayOfJourney, arrivalTime, a
 }
 
 
-module.exports = userFileUploadOBJ;
+
