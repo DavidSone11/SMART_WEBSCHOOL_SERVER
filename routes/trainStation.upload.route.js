@@ -34,7 +34,7 @@ module.exports = {
 
         var query = userFileUploadModel.find({ fileName: req.params.fname });
         query.then(function (res) {
-            processToTrainStations(res);
+            processTrainStationsToDB(res);
 
         }, function (err) {
 
@@ -91,9 +91,7 @@ function extension(f) {
     return y;
 }
 
-function processToTrainStations(res) {
-
-
+function processTrainStationsToDB(res) {
     try {
         var data = res[0]._doc.data;
 
