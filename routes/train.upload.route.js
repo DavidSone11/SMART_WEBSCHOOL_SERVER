@@ -123,10 +123,8 @@ function processTrainsToDB(res) {
             fromStation = rowdata[2];
             toStation = rowdata[3];
             trainType = rowdata[11];
-
-
             var runningDays = [];
-            var nCount = 0;
+            
             for (var j = 0; j < 7; j++) {
                 var runningDay = rowdata[4 + j];
                 if (runningDay != "") {
