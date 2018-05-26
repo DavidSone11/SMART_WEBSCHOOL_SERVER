@@ -1,19 +1,21 @@
 (function () {
     // reverse string without using method
 
-    function getInitValues(S){
+    function getInitValues(S) {
         this.s = S;
     }
-    getInitValues.prototype.beforeReverseString = function() {
-        console.log("Before Reversing String : "+this.s);
+    getInitValues.prototype.beforeReverseString = function () {
+        console.log("Before Reversing String : " + this.s);
     }
-    getInitValues.prototype.afterReverseString = function() {
+    getInitValues.prototype.afterReverseString = function () {
         var revString = "";
-        for (var n = this.s.length - 1; n >= 0; n--) {
-            revString += this[n];
+        if (this.s) {
+            for (var n = this.s.length - 1; n >= 0; n--) {
+                revString += this.s[n];
+            }
         }
-        console.log("After Reversing String : "+revString);
-        
+        console.log("After Reversing String : " + revString);
+
     }
 
     // swap a number without using third variable 
@@ -40,7 +42,7 @@
     var s0 = new getInitValues("Welcome");
     s0.beforeReverseString();
     s0.afterReverseString();
-    
+
 
     var s = new getValues(20, 30);
     s.beforeSwap();
