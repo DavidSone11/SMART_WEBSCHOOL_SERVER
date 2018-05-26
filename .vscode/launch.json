@@ -8,8 +8,16 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-             "console": "integratedTerminal",
+            "console": "integratedTerminal",
             "program": "${workspaceFolder}\\app.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "debug Program",
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/Prototypes/string.reverse.prop.js",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
