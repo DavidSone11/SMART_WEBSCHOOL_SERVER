@@ -9,7 +9,7 @@
     }
     getInitValues.prototype.afterReverseString = function () {
         var revString = "";
-        if (this.s) {
+        if (this.s||!(this.s.length==0)) {
             for (var n = this.s.length - 1; n >= 0; n--) {
                 revString += this.s[n];
             }
