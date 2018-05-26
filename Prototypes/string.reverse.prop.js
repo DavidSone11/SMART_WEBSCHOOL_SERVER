@@ -1,6 +1,5 @@
 (function () {
     // reverse string without using method
-
     function getInitValues(S) {
         this.s = S;
     }
@@ -34,6 +33,13 @@
         console.log("After Swapping: " + "X=" + this.X + " Y=" + this.Y);
     }
 
+    getValues.prototype.swapBitWiseNumber = function () {
+        this.X = this.X ^ this.Y;
+        this.Y = this.X ^ this.Y;
+        this.X = this.X ^ this.Y;
+        console.log("After Swapping Using Bitwise : " + "X=" + this.X + " Y=" + this.Y);
+    }
+
 
 
 
@@ -42,7 +48,6 @@
     var s0 = new getInitValues("Welcome");
     s0.beforeReverseString();
     s0.afterReverseString();
-
 
     var s = new getValues(20, 30);
     s.beforeSwap();
