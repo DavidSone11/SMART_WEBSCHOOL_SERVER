@@ -14,7 +14,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "debug Program",
+            "name": "reverse String Program",
             "console": "integratedTerminal",
             "program": "${workspaceFolder}/Prototypes/string.reverse.prop.js",
             "cwd": "${workspaceFolder}"

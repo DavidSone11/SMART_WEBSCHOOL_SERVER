@@ -52,6 +52,7 @@
     var s = new getValues(20, 30);
     s.beforeSwap();
     s.swapNumber();
+    s.swapBitWiseNumber();
 
 
 }());
