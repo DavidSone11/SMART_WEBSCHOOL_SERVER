@@ -33,7 +33,7 @@
         console.log("After Swapping: " + "X=" + this.X + " Y=" + this.Y);
     }
 
-    getValues.prototype.swapBitWiseNumber = function () {
+    getValues.prototype.swapBitWiseNumber = function swapBitWiseNumber() {
         this.X = this.X ^ this.Y;
         this.Y = this.X ^ this.Y;
         this.X = this.X ^ this.Y;
