@@ -8,12 +8,24 @@
     }
     getInitValues.prototype.afterReverseString = function () {
         var revString = "";
-        if (this.s||!(this.s.length==0)) {
+        if (this.s || !(this.s.length == 0)) {
             for (var n = this.s.length - 1; n >= 0; n--) {
                 revString += this.s[n];
             }
         }
         console.log("After Reversing String : " + revString);
+
+    }
+    getInitValues.prototype.subReverseString = function () {
+        var revString = "";
+        try {
+            if (this.s || !(this.s.length == 0)) {
+                revString = (this.s === '') ? '' : subReverseString(this.s.substr(1)) + this.s.charAt(0);
+            }
+        } catch (e) {
+            console.log("Error in String reverese :" + e);
+        }
+        console.log("After subReverseString String : " + revString);
 
     }
 
@@ -48,11 +60,12 @@
     var s0 = new getInitValues("Welcome");
     s0.beforeReverseString();
     s0.afterReverseString();
-
+    console.log(s0.subReverseString());
     var s = new getValues(20, 30);
     s.beforeSwap();
     s.swapNumber();
     s.swapBitWiseNumber();
+
 
 
 }());
