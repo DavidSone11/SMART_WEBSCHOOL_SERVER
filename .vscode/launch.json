@@ -16,7 +16,7 @@
             "request": "launch",
             "name": "reverse String Program",
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}/Prototypes/string.reverse.prop.js",
+            "program": "${workspaceFolder}/Prototypes/string.paragraph.prop.js",
             "cwd": "${workspaceFolder}"
         }
     ]
