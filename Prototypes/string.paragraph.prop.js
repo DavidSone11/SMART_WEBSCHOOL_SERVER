@@ -10,17 +10,19 @@
 
     }
 
-    "".findParagraph();
+    //"".findParagraph();
     var readFile = function (path, fname) {
         try {
+            var s = "";
             fs.readFile(path + fname, function (err, data) {
                 if (err) throw new Error("Error in Reading data :" + err);
-                var actualText = data.toString('utf8');
-                console.log(actualText);
-
+                 s += data.toString('utf8');
+                 var rows = s.split("\n");
+                 for (var row_num  = 0; row_num  < rows.length - 1; row_num++){
+                    console.log(lines[row_num]);
+                 }
             });
         } catch (exp) {
-            console.log(exp);
             throw new Error("Error in Reading File :" + e);
         }
     }
