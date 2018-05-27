@@ -21,7 +21,7 @@
                  var rows = s.split("\n");
                  for (var row_num  = 0; row_num  < rows.length - 1; row_num++){
                     console.log(rows[row_num]);
-                     if(rows[row_num].indexOf(".")!==-1){
+                     if(rows[row_num].indexOf(".") ==-1){
                         paraCount++;
                      }
                  }
