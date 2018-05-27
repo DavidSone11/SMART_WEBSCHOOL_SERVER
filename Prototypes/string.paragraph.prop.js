@@ -4,7 +4,7 @@
     'use strict';
     var fs = require('fs');
     String.prototype.findParagraph = function findParagraph() {
-        console.log(this);
+        // console.log(this);
     }
 
     //"".findParagraph();
@@ -17,19 +17,19 @@
                 s += data.toString('utf8');
                 var rows = s.split("\n");
                 for (var row_num = 0; row_num < rows.length - 1; row_num++) {
-                    console.log(rows[row_num]);
+                    // console.log(rows[row_num]);
                     if (rows[row_num].indexOf(".") == -1) {
                         paraCount++;
                     }
                 }
-                console.log("No of Para :" + paraCount);
+                //console.log("No of Para :" + paraCount);
             });
         } catch (exp) {
             throw new Error("Error in Reading File :" + e);
         }
     }
 
-    readFile("./UploadCSV/", "Readme.txt");
+    // readFile("./UploadCSV/", "Readme.txt");
 
     var vowelCount = function (str1) {
         var vowel_list = 'aeiouAEIOU';
@@ -39,26 +39,31 @@
                 vcount += 1;
             }
         }
-        return "The Total No of Vowels in the String is :" + vcount;
+        return "The Total No of Vowels is : " + vcount;
     }
     console.log(vowelCount("The quick brown fox"));
 
-     var countVowelInString = function(str,ch){
+    var countVowelInString = function (str, ch) {
 
-        var result = "";
-    switch(ch||!(ch.length==0)){
-        case "m1":
-                  result = str.match(/[A,E,I,O,U]/gi).length
-                  break;
+        var result = 0;
+        switch (ch || !(ch.length == 0)) {
+            case "m1":
+                result = str.match(/[A,E,I,O,U]/gi).length
+                break;
 
-        return result;
+            case "m2":
+                result = str.replace(/[^aeiou]/g, "").length
+                break;
+
+            case "m3":
+                result = "This string contains: " + str.replace(/[^aeiou]+/gi, "").length + " vowels";
 
 
+        }
+        return " : " + result;
     }
 
-     }
-
-     vowelCountInString("The quick brown fox","m1");
+    console.log(countVowelInString("The quick brown fox", "m3"));
 
 
 }());
