@@ -4,10 +4,7 @@
     'use strict';
     var fs = require('fs');
     String.prototype.findParagraph = function findParagraph() {
-
         console.log(this);
-
-
     }
 
     //"".findParagraph();
@@ -32,20 +29,37 @@
         }
     }
 
-    function vowel_count(str1) {
+    readFile("./UploadCSV/", "Readme.txt");
+
+    var vowelCount = function (str1) {
         var vowel_list = 'aeiouAEIOU';
         var vcount = 0;
         for (var x = 0; x < str1.length; x++) {
             if (vowel_list.indexOf(str1[x]) !== -1) {
                 vcount += 1;
             }
-
         }
-        return vcount;
+        return "The Total No of Vowels in the String is :" + vcount;
     }
-    console.log(vowel_count("The quick brown fox"));
+    console.log(vowelCount("The quick brown fox"));
 
-    readFile("./UploadCSV/", "Readme.txt");
+     var countVowelInString = function(str,ch){
+
+        var result = "";
+    switch(ch||!(ch.length==0)){
+        case "m1":
+                  result = str.match(/[A,E,I,O,U]/gi).length
+                  break;
+
+        return result;
+
+
+    }
+
+     }
+
+     vowelCountInString("The quick brown fox","m1");
+
 
 }());
 
