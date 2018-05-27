@@ -16,17 +16,30 @@
         console.log("After Reversing String : " + revString);
 
     }
-    getInitValues.prototype.subReverseString = function () {
-        var revString = "";
-        try {
-            if (this.s || !(this.s.length == 0)) {
-                revString = (this.s === '') ? '' : subReverseString(this.s.substr(1)) + this.s.charAt(0);
-            }
-        } catch (e) {
-            console.log("Error in String reverese :" + e);
-        }
-        console.log("After subReverseString String : " + revString);
+    String.prototype.subReverseString = function () {
 
+    }
+
+
+    /**
+     *  Reverse string using split and Join Method
+     */
+    String.prototype.reverseStringUsingSplit = function (ch) {
+        var revStr = null;
+        if (this || !(this.length == 0)) {
+            switch (ch) {
+                case 'm1':
+                    revStr = this.split("").reverse().join("");
+                    break;
+                case 'm2':
+                    var splitStr = this.split("");
+                    var revStr = splitStr.reverse();
+                    revStr = revStr.join("");
+                    break;
+
+            }
+        }
+        return revStr;
     }
 
     // swap a number without using third variable 
@@ -60,7 +73,8 @@
     var s0 = new getInitValues("Welcome");
     s0.beforeReverseString();
     s0.afterReverseString();
-    console.log(s0.subReverseString());
+    "Welcome".subReverseString();
+    // "Welcome".reverseStringUsingSplit("m1");
     var s = new getValues(20, 30);
     s.beforeSwap();
     s.swapNumber();
@@ -70,3 +84,11 @@
 
 }());
 
+
+function reverseString(str) {
+    if (str === "" || !str || (str.length == 0))
+        return "";
+    return (str === '') ? '' : reverseString(str.substr(1)) + str.charAt(0);
+}
+console.log("Before Reversing Element : Hello")
+console.log("After Reversing Element : "+reverseString("Hello"));
